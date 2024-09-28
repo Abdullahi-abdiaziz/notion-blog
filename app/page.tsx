@@ -24,7 +24,7 @@ export default async function Page({ searchParams }: SearchProps) {
 
   return (
     <section className="min-h-screen max-w-screen-xl mx-auto">
-      <header className="mb-8">
+      <header className="mb-8 my-20 p-4">
         <h1 className="text-4xl font-bold mb-2">Welcome to Our Tech Blog</h1>
         <p className="text-xl text-muted-foreground">
           Stay updated with the latest in web development and technology
