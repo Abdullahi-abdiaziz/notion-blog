@@ -12,8 +12,13 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        sans: ["Inter", "system-ui", "Arial", "sans-serif"],
+        mono: ["JetBrains Mono", "SF Mono", "Menlo", "monospace"],
+        geist: ["Geist Mono", "Geist UI Mono", "Geist UI Icons"],
+      },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
 export default config;
