@@ -7,8 +7,10 @@ const Header = () => {
     <header className="border-b py-3 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between">
-          <Image src={"/image.png"} width={120} height={50} alt="logo" />
-          <nav className="flex gap-10">
+          <Link href={"/"}>
+            <Image src={"/image.png"} width={90} height={50} alt="logo" />
+          </Link>
+          <nav className="flex gap-4 sm:gap-6 lg:gap-10 ">
             <Link href={"/"} className="hover:text-primary">
               Home
             </Link>

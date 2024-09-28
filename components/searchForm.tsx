@@ -14,7 +14,7 @@ function SearchForm() {
   };
 
   return (
-    <form onSubmit={handleSearch} className="flex gap-2 mb-8 p-4">
+    <form onSubmit={handleSearch} className="flex gap-2 mb-8 p-4 max-w-xl">
       <Input
         type="search"
         placeholder="Search posts..."
@@ -22,7 +22,7 @@ function SearchForm() {
         onChange={(e) => setSearchTerm(e.target.value)}
         className="flex-grow p-4"
       />
-      <Button type="submit" size="icon">
+      <Button type="submit" size="icon" className="w-10">
         <Search className="h-4 w-4" />
         <span className="sr-only">Search</span>
       </Button>

@@ -3,6 +3,7 @@ import { BlogPost } from "@/types/schema";
 import Link from "next/link";
 
 import SearchForm from "@/components/searchForm";
+import { Forward } from "lucide-react";
 
 interface SearchProps {
   searchParams?: { search?: string };
@@ -23,10 +24,12 @@ export default async function Page({ searchParams }: SearchProps) {
   );
 
   return (
-    <section className="min-h-screen max-w-screen-xl mx-auto">
-      <header className="mb-8 my-20 p-4">
-        <h1 className="text-4xl font-bold mb-2">Welcome to Our Tech Blog</h1>
-        <p className="text-xl text-muted-foreground">
+    <section className="min-h-screen md:max-w-screen-xl mx-auto ">
+      <header className="mb-8 my-20 p-4 container">
+        <h1 className="text-2xl md:text-3xl font-bold mb-2">
+          Welcome to Our Tech Blog
+        </h1>
+        <p className="text-base md:text-xl ">
           Stay updated with the latest in web development and technology
         </p>
       </header>
@@ -34,11 +37,15 @@ export default async function Page({ searchParams }: SearchProps) {
       {/* Search Form */}
       <SearchForm />
 
-      <div className="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 container py-8">
+      <h3 className="flex items-center gap-1  mx-5 font-extrabold text-xl container">
+        <Forward size={25} />
+        Recent Posts
+      </h3>
+      <div className="mx-auto flex items-center flex-wrap gap-10  py-8 px-5">
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Link key={post.id} href={`/posts/${post.slug}`}>
-              <article className="border p-2 rounded-md shadow-md w-full">
+              <article className="border p-2 rounded-md shadow-md max-w-96 h-[25rem] w-full">
                 {post.cover && (
                   <img
                     className="h-60 w-full object-cover rounded-md"
@@ -65,7 +72,6 @@ export default async function Page({ searchParams }: SearchProps) {
                       </span>
                     ))}
                   </p>
-                  <p>{post.description}</p>
                 </div>
               </article>
             </Link>
