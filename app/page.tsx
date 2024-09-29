@@ -1,12 +1,53 @@
 import NotionService from "@/services/notion-service";
 import { BlogPost } from "@/types/schema";
 import Link from "next/link";
-
 import SearchForm from "@/components/searchForm";
 import { Forward } from "lucide-react";
+import { Metadata } from "next";
 
 interface SearchProps {
   searchParams?: { search?: string };
+}
+
+// Generate dynamic metadata
+export async function generateMetadata({
+  searchParams,
+}: SearchProps): Promise<Metadata> {
+  const notionService = new NotionService();
+  const posts: BlogPost[] = await notionService.getBlogPosts();
+
+  // Determine meta tags based on search results or general blog information
+  const title = "Our Tech Blog - Stay Updated with the Latest in Tech";
+  const description =
+    "Explore our latest blog posts covering web development, programming, and tech news.";
+  const defaultImage = "https://shorturl.at/tsFLd"; // Provide a default image URL
+
+  // Use the first post's data for Open Graph and Twitter Card
+  const post = posts.length > 0 ? posts[0] : null;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: post ? post.title : title,
+      description: post ? post.description : description,
+      type: "website",
+      images: [
+        {
+          url: post?.cover || defaultImage,
+          width: 1200,
+          height: 630,
+          alt: post?.title || "Default Blog Image",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post ? post.title : title,
+      description: post ? post.description : description,
+      images: post?.cover || defaultImage,
+    },
+  };
 }
 
 export default async function Page({ searchParams }: SearchProps) {
@@ -24,12 +65,12 @@ export default async function Page({ searchParams }: SearchProps) {
   );
 
   return (
-    <section className="min-h-screen md:max-w-screen-xl mx-auto ">
+    <section className="min-h-screen md:max-w-screen-xl mx-auto">
       <header className="mb-8 my-20 p-4 container">
         <h1 className="text-2xl md:text-3xl font-bold mb-2">
           Welcome to Our Tech Blog
         </h1>
-        <p className="text-base md:text-xl ">
+        <p className="text-base md:text-xl">
           Stay updated with the latest in web development and technology
         </p>
       </header>
@@ -37,11 +78,12 @@ export default async function Page({ searchParams }: SearchProps) {
       {/* Search Form */}
       <SearchForm />
 
-      <h3 className="flex items-center gap-1  mx-5 font-extrabold text-xl container">
+      <h3 className="flex items-center gap-1 mx-5 font-extrabold text-xl container">
         <Forward size={25} />
         Recent Posts
       </h3>
-      <div className="mx-auto flex items-center flex-wrap gap-10  py-8 px-5">
+
+      <div className="mx-auto flex items-center flex-wrap gap-10 py-8 px-5">
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Link key={post.id} href={`/posts/${post.slug}`}>

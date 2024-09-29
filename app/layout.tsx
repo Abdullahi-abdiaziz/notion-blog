@@ -17,7 +17,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Notion Blog",
-  description: "a Blog site that is controlled by notion",
+  description: "a Blog site that is controlled by notion, ",
 };
 
 export default function RootLayout({

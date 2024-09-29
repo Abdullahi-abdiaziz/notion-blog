@@ -3,7 +3,7 @@ import Markdown from "react-markdown";
 import NotionService from "../../../services/notion-service"; // Adjust the path if necessary
 import React from "react";
 import remarkGfm from "remark-gfm";
-import Head from "next/head";
+import { Metadata } from "next";
 
 interface PostPageProps {
   params: { slug: string };
@@ -19,6 +19,50 @@ export async function generateStaticParams() {
   }));
 }
 
+// Use dynamic metadata fetching
+export async function generateMetadata({
+  params,
+}: PostPageProps): Promise<Metadata> {
+  const notionService = new NotionService();
+  const post = await notionService.getPostBySlug(params.slug);
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+      description: "The requested post does not exist.",
+      openGraph: {
+        title: "Post Not Found",
+        description: "The requested post does not exist.",
+        type: "article",
+      },
+    };
+  }
+
+  return {
+    title: post.post.title,
+    description: post.post.description,
+    openGraph: {
+      title: post.post.title,
+      description: post.post.description,
+      type: "article",
+      images: [
+        {
+          url: post.post.cover,
+          width: 1200,
+          height: 630,
+          alt: "Post Cover Image",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.post.title,
+      description: post.post.description,
+      images: post.post.cover,
+    },
+  };
+}
+
 const PostPage = async ({ params }: PostPageProps) => {
   const notionService = new NotionService();
   const post = await notionService.getPostBySlug(params.slug);
@@ -30,22 +74,6 @@ const PostPage = async ({ params }: PostPageProps) => {
 
   return (
     <>
-      <Head>
-        <title>{post.post.title} - Blog</title>
-        <meta name="description" content={post.post.description} />
-        <meta property="og:title" content={post.post.title} />
-        <meta property="og:description" content={post.post.description} />
-        <meta property="og:image" content={post.post.cover} />
-        <meta property="og:type" content="article" />
-        <meta
-          property="og:url"
-          content={`https://yourdomain.com/post/${post.post.slug}`}
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={post.post.title} />
-        <meta name="twitter:description" content={post.post.description} />
-        <meta name="twitter:image" content={post.post.cover} />
-      </Head>
       <div className="max-w-screen-xl my-10 mx-auto">
         <h1 className="text-center text-2xl md:text-3xl lg:text-4xl font-extrabold space-y-2">
           {post.post.title}
@@ -68,7 +96,7 @@ const PostPage = async ({ params }: PostPageProps) => {
             {post.post.tags.map((tag, index) => (
               <span
                 key={index}
-                className="inline-block text-base bg-green-100 text-green-900 px-2 py-0.5 rounded-md mr-2  t"
+                className="inline-block text-base bg-green-100 text-green-900 px-2 py-0.5 rounded-md mr-2"
               >
                 {tag.name.toLowerCase()}
               </span>
