@@ -4,6 +4,7 @@ import Link from "next/link";
 import SearchForm from "@/components/searchForm";
 import { Forward } from "lucide-react";
 import { Metadata } from "next";
+import Image from "next/image";
 
 interface SearchProps {
   searchParams?: { search?: string };
@@ -17,35 +18,34 @@ export async function generateMetadata({
   const posts: BlogPost[] = await notionService.getBlogPosts();
 
   // Determine meta tags based on search results or general blog information
-  const title = "Our Tech Blog - Stay Updated with the Latest in Tech";
+  const title = "Kawtech | Blog - Stay Updated with the Latest in Tech";
   const description =
     "Explore our latest blog posts covering web development, programming, and tech news.";
   const defaultImage = "https://shorturl.at/tsFLd"; // Provide a default image URL
 
   // Use the first post's data for Open Graph and Twitter Card
-  const post = posts.length > 0 ? posts[0] : null;
 
   return {
     title,
     description,
     openGraph: {
-      title: post ? post.title : title,
-      description: post ? post.description : description,
+      title: title,
+      description: description,
       type: "website",
       images: [
         {
-          url: post?.cover || defaultImage,
+          url: defaultImage,
           width: 1200,
           height: 630,
-          alt: post?.title || "Default Blog Image",
+          alt: "Default Blog Image",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: post ? post.title : title,
-      description: post ? post.description : description,
-      images: post?.cover || defaultImage,
+      title: title,
+      description: description,
+      images: defaultImage,
     },
   };
 }
@@ -78,10 +78,10 @@ export default async function Page({ searchParams }: SearchProps) {
       {/* Search Form */}
       <SearchForm />
 
-      <h3 className="flex items-center gap-1 mx-5 font-extrabold text-xl container">
+      <h2 className="flex items-center gap-1 mx-5 font-extrabold text-xl container">
         <Forward size={25} />
         Recent Posts
-      </h3>
+      </h2>
 
       <div className="mx-auto flex items-center flex-wrap gap-10 py-8 px-5">
         {filteredPosts.length > 0 ? (
@@ -89,12 +89,16 @@ export default async function Page({ searchParams }: SearchProps) {
             <Link key={post.id} href={`/posts/${post.slug}`}>
               <article className="border p-2 rounded-md shadow-md max-w-96 h-[25rem] w-full">
                 {post.cover && (
-                  <img
-                    className="h-60 w-full object-cover rounded-md"
+                  <Image
+                    className="rounded-md"
                     src={post.cover}
                     alt={post.title}
+                    width={600} // Set a proper width according to your design
+                    height={240} // Set an appropriate height
+                    objectFit="cover"
                   />
                 )}
+
                 <div className="px-2 py-4">
                   <p className="mb-2 text-xs font-medium">
                     {new Date(post.date).toLocaleDateString("en-US", {
@@ -103,7 +107,7 @@ export default async function Page({ searchParams }: SearchProps) {
                       year: "numeric",
                     })}
                   </p>
-                  <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+                  <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
                   <p className="mb-2">
                     {post.tags.map((tag, index) => (
                       <span

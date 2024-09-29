@@ -4,6 +4,7 @@ import NotionService from "../../../services/notion-service"; // Adjust the path
 import React from "react";
 import remarkGfm from "remark-gfm";
 import { Metadata } from "next";
+import Image from "next/image";
 
 interface PostPageProps {
   params: { slug: string };
@@ -78,7 +79,7 @@ const PostPage = async ({ params }: PostPageProps) => {
         <h1 className="text-center text-2xl md:text-3xl lg:text-4xl font-extrabold space-y-2">
           {post.post.title}
         </h1>
-        <img
+        <Image
           src={post.post.cover}
           className="rounded-[1rem] max-w-full block w-full h-[250px] md:h-[550px] my-10 mx-auto px-2"
           alt="post cover"
