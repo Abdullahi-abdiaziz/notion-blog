@@ -91,10 +91,10 @@ export default async function Page({ searchParams }: SearchProps) {
                 {post.cover && (
                   <Image
                     className="rounded-md"
-                    src={post.cover}
+                    src={post?.cover}
                     alt={post.title}
                     width={600} // Set a proper width according to your design
-                    height={240} // Set an appropriate height
+                    height={100} // Set an appropriate height
                     objectFit="cover"
                   />
                 )}

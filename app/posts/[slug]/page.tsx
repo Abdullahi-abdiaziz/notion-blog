@@ -80,9 +80,13 @@ const PostPage = async ({ params }: PostPageProps) => {
           {post.post.title}
         </h1>
         <Image
+          className="rounded-xl my-10 px-2"
           src={post.post.cover}
-          className="rounded-[1rem] max-w-full block w-full h-[250px] md:h-[550px] my-10 mx-auto px-2"
-          alt="post cover"
+          alt={post.post.title}
+          width={800} // Provide the original image width
+          height={300} // Provide the original image height
+          layout="responsive" // Automatically scale the image
+          style={{ objectFit: "cover" }}
         />
         <div className="flex flex-col md:flex-row md:gap-4 items-center justify-center max-w-7xl ">
           <p className="mb-2 text-sm font-medium text-center">
