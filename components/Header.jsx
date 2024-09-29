@@ -17,7 +17,7 @@ const Header = () => {
             <Link href={"/posts"} className="hover:text-primary">
               Posts
             </Link>
-            <Link href={"/contact"} className="hover:text-primary">
+            <Link href={"/contacts"} className="hover:text-primary">
               Contact
             </Link>
           </nav>

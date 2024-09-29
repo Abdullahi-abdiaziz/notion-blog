@@ -96,6 +96,7 @@ export default async function Page({ searchParams }: SearchProps) {
                     width={600} // Set a proper width according to your design
                     height={100} // Set an appropriate height
                     objectFit="cover"
+                    priority={true}
                   />
                 )}
 

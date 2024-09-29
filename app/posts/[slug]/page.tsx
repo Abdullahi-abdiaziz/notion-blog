@@ -87,6 +87,7 @@ const PostPage = async ({ params }: PostPageProps) => {
           height={300} // Provide the original image height
           layout="responsive" // Automatically scale the image
           style={{ objectFit: "cover" }}
+          priority={true}
         />
         <div className="flex flex-col md:flex-row md:gap-4 items-center justify-center max-w-7xl ">
           <p className="mb-2 text-sm font-medium text-center">
