@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["images.unsplash.com"], // Whitelist Unsplash domain
+    domains: ["kawtech.sirv.com"], // Whitelist Unsplash domain
   },
 };
 

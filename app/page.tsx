@@ -23,8 +23,6 @@ export async function generateMetadata({
     "Explore our latest blog posts covering web development, programming, and tech news.";
   const defaultImage = "https://shorturl.at/tsFLd"; // Provide a default image URL
 
-  // Use the first post's data for Open Graph and Twitter Card
-
   return {
     title,
     description,
@@ -87,16 +85,17 @@ export default async function Page({ searchParams }: SearchProps) {
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Link key={post.id} href={`/posts/${post.slug}`}>
-              <article className="border p-2 rounded-md shadow-md max-w-96 h-[25rem] w-full">
+              <article className="border p-2 rounded-md shadow-md  h-[25rem] w-96">
                 {post.cover && (
                   <Image
                     className="rounded-md"
-                    src={post?.cover}
-                    alt={post.title}
-                    width={600} // Set a proper width according to your design
-                    height={100} // Set an appropriate height
+                    src={post.cover}
+                    alt="Post cover"
+                    width={420}
+                    height={270}
                     objectFit="cover"
                     priority={true}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 )}
 
