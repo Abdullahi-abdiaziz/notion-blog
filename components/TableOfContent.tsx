@@ -11,7 +11,7 @@ interface Heading {
 }
 
 const extractHeadings = (markdown: string) => {
-  const headingMatches = markdown.match(/^(#{1,6})\s+(.*)$/gm);
+  const headingMatches = markdown?.match(/^(#{1,6})\s+(.*)$/gm);
   if (!headingMatches) return [];
 
   return headingMatches.map((heading) => {
