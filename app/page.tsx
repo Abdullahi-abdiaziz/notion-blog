@@ -81,36 +81,36 @@ export default async function Page({ searchParams }: SearchProps) {
         Recent Posts
       </h2>
 
-      <div className="mx-auto flex items-center flex-wrap gap-10 py-8 px-5">
+      <div className="mx-auto flex flex-wrap gap-8 py-8 px-5">
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Link key={post.id} href={`/posts/${post.slug}`}>
-              <article className="border p-2 rounded-md shadow-md  h-[25rem] w-96">
+              <article className="border mx-auto rounded-md shadow-md w-full h-[28rem] sm:w-[22rem] lg:w-[25rem] relative">
                 {post.cover && (
-                  <div className="w-[420px] h-[270px] border">
+                  <div className="w-full h-48 sm:h-56 md:h-64 lg:h-72 border-b rounded-t-md overflow-hidden">
                     <Image
-                      className="rounded-md"
                       src={post.cover}
                       alt="Post cover"
                       width={420}
                       height={270}
-                      priority={true}
-                      objectFit="cover"
-                      style={{ width: "auto", height: "100%" }}
+                      priority
+                      className="object-cover w-full h-full"
                     />
                   </div>
                 )}
 
-                <div className="px-2 py-4">
-                  <p className="mb-2 text-xs font-medium">
+                <div className="px-4 py-4">
+                  <p className="mb-2 text-xs font-medium text-gray-500">
                     {new Date(post.date).toLocaleDateString("en-US", {
                       day: "numeric",
                       month: "long",
                       year: "numeric",
                     })}
                   </p>
-                  <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-                  <p className="mb-2">
+                  <h3 className="text-lg font-semibold mb-2 text-gray-800 ">
+                    {post.title}
+                  </h3>
+                  <div className="mb-2 absolute bottom-0">
                     {post.tags.map((tag, index) => (
                       <span
                         key={index}
@@ -119,7 +119,7 @@ export default async function Page({ searchParams }: SearchProps) {
                         {tag.name.toLowerCase()}
                       </span>
                     ))}
-                  </p>
+                  </div>
                 </div>
               </article>
             </Link>
