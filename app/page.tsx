@@ -87,16 +87,18 @@ export default async function Page({ searchParams }: SearchProps) {
             <Link key={post.id} href={`/posts/${post.slug}`}>
               <article className="border p-2 rounded-md shadow-md  h-[25rem] w-96">
                 {post.cover && (
-                  <Image
-                    className="rounded-md"
-                    src={post.cover}
-                    alt="Post cover"
-                    width={420}
-                    height={270}
-                    objectFit="cover"
-                    priority={true}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
+                  <div className="w-[420px] h-[270px] border">
+                    <Image
+                      className="rounded-md"
+                      src={post.cover}
+                      alt="Post cover"
+                      width={420}
+                      height={270}
+                      priority={true}
+                      objectFit="cover"
+                      style={{ width: "auto", height: "100%" }}
+                    />
+                  </div>
                 )}
 
                 <div className="px-2 py-4">

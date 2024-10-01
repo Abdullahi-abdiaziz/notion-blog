@@ -1,26 +1,35 @@
-// app/post/[slug]/page.tsx
-import Markdown from "react-markdown";
-import NotionService from "../../../services/notion-service"; // Adjust the path if necessary
-import React from "react";
-import remarkGfm from "remark-gfm";
 import { Metadata } from "next";
+import NotionService from "../../../services/notion-service";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+import React from "react";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+// Lazy load the TableOfContents component
+const TableOfContents = dynamic(
+  () => import("../../../components/TableOfContent"),
+  {
+    ssr: false,
+  }
+);
 
 interface PostPageProps {
   params: { slug: string };
 }
 
-// Fetch data using an async function
-export async function generateStaticParams() {
-  const notionService = new NotionService();
-  const blogPosts = await notionService.getBlogPosts();
-
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
+interface Post {
+  post: {
+    title: string;
+    cover: string;
+    date: string;
+    description: string;
+    tags: { name: string }[];
+  };
+  markdown: string;
 }
 
-// Use dynamic metadata fetching
+// Fetch metadata for SEO
 export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
@@ -31,51 +40,79 @@ export async function generateMetadata({
     return {
       title: "Post Not Found",
       description: "The requested post does not exist.",
-      openGraph: {
-        title: "Post Not Found",
-        description: "The requested post does not exist.",
-        type: "article",
-      },
     };
   }
 
   return {
     title: post.post.title,
     description: post.post.description,
-    openGraph: {
-      title: post.post.title,
-      description: post.post.description,
-      type: "article",
-      images: [
-        {
-          url: post.post.cover,
-          width: 1200,
-          height: 630,
-          alt: "Post Cover Image",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.post.title,
-      description: post.post.description,
-      images: post.post.cover,
-    },
   };
 }
+const extractId = (
+  children: React.ReactNode,
+  headings: { level: number; text: string; id: string }[],
+  level: number
+): string => {
+  // Extract the text content from the React children
+  const text = React.Children.toArray(children)
+    .map((child) =>
+      typeof child === "string"
+        ? child
+        : (child as React.ReactElement)?.props?.children ?? ""
+    )
+    .filter(Boolean)
+    .join("")
+    .trim();
 
+  // Sanitize and format the text to create a kebab-case ID
+  const kebabCaseText = text
+    .replace(/[^\w\s/.]+/g, "") // Remove special characters except slashes and periods
+    .replace(/\s+/g, "-") // Replace spaces with dashes
+    .replace(/[/.]+/g, "-") // Replace slashes and periods with dashes
+    .replace(/--+/g, "-") // Replace multiple dashes with a single dash
+    .toLowerCase();
+
+  // Find a matching heading by level and text, if it exists
+  const matchingHeading = headings.find(
+    (heading) => heading.level === level && heading.text === text
+  );
+
+  // Return the matched heading's ID or the generated kebab-case ID
+  return matchingHeading?.id ?? kebabCaseText;
+};
+
+const extractHeadings = (markdown: string) => {
+  const headingMatches = markdown.match(/^(#{1,6})\s+(.*)$/gm);
+  if (!headingMatches) return [];
+
+  return headingMatches.map((heading) => {
+    const level = heading.indexOf(" ") - 1;
+    const text = heading.replace(/^#+\s/, "").trim();
+
+    const lower = text.replace(/[^\w]+/g, "-").toLowerCase(); // Clean <ID></ID>
+    const id = lower.replace(/^-+|-+$/g, "");
+
+    return { level, text, id };
+  });
+};
+// Server-side rendering of post content
 const PostPage = async ({ params }: PostPageProps) => {
   const notionService = new NotionService();
   const post = await notionService.getPostBySlug(params.slug);
 
   if (!post) {
-    // Optionally return 404 component or message if post not found
     return <div>Post not found</div>;
   }
 
+  // Extract headings from the Markdown content
+  const headings = extractHeadings(post.markdown);
+
   return (
-    <>
-      <div className="max-w-screen-xl my-10 mx-auto">
+    <div className="max-w-screen-2xl my-10 mx-auto flex gap-4">
+      {/* Table of Contents */}
+
+      {/* Main Content */}
+      <div className="w-full md:w-3/4">
         <h1 className="text-center text-2xl md:text-3xl lg:text-4xl font-extrabold space-y-2">
           {post.post.title}
         </h1>
@@ -83,9 +120,9 @@ const PostPage = async ({ params }: PostPageProps) => {
           className="rounded-xl my-10 px-2"
           src={post.post.cover}
           alt={post.post.title}
-          width={800} // Provide the original image width
-          height={300} // Provide the original image height
-          layout="responsive" // Automatically scale the image
+          width={800}
+          height={300}
+          layout="responsive"
           style={{ objectFit: "cover" }}
           priority={true}
         />
@@ -109,11 +146,44 @@ const PostPage = async ({ params }: PostPageProps) => {
             ))}
           </p>
         </div>
+
         <article className="prose text-sm md:text-base lg:text-lg mx-auto max-w-5xl mt-10 px-5">
-          <Markdown remarkPlugins={[remarkGfm]}>{post.markdown}</Markdown>
+          {/* Render Markdown with custom heading renderer */}
+          <Markdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              h1: ({ children }) => {
+                const id = extractId(children, headings, 1);
+                return <h1 id={id}>{children}</h1>;
+              },
+              h2: ({ children }) => {
+                const id = extractId(children, headings, 2);
+                return <h2 id={id}>{children}</h2>;
+              },
+              h3: ({ children }) => {
+                const id = extractId(children, headings, 3);
+                return <h3 id={id}>{children}</h3>;
+              },
+              h4: ({ children }) => {
+                const id = extractId(children, headings, 4);
+                return <h4 id={id}>{children}</h4>;
+              },
+              h5: ({ children }) => {
+                const id = extractId(children, headings, 5);
+                return <h5 id={id}>{children}</h5>;
+              },
+
+              // Other headings...
+            }}
+          >
+            {post.markdown}
+          </Markdown>
         </article>
       </div>
-    </>
+      <aside className="w-1/4 sticky top-20 h-screen hidden md:block">
+        <TableOfContents markdown={post.markdown} />
+      </aside>
+    </div>
   );
 };
 
