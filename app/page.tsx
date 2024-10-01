@@ -85,7 +85,7 @@ export default async function Page({ searchParams }: SearchProps) {
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Link key={post.id} href={`/posts/${post.slug}`}>
-              <article className="border mx-auto rounded-md shadow-md w-full h-[28rem] sm:w-[22rem] lg:w-[25rem] relative">
+              <article className="border mx-auto rounded-md shadow-md w-ful h-[23rem] sm:h-[25rem] lg:h-[28rem] sm:w-[22rem] lg:w-[25rem] relative">
                 {post.cover && (
                   <div className="w-full h-48 sm:h-56 md:h-64 lg:h-72 border-b rounded-t-md overflow-hidden">
                     <Image
@@ -107,7 +107,7 @@ export default async function Page({ searchParams }: SearchProps) {
                       year: "numeric",
                     })}
                   </p>
-                  <h3 className="text-lg font-semibold mb-2 text-gray-800 ">
+                  <h3 className="text-lg font-semibold mb-2 text-gray-800 line-clamp-2">
                     {post.title}
                   </h3>
                   <div className="mb-2 absolute bottom-0">

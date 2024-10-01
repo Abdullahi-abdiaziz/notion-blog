@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation"; // For handling route changes
+import { LucideTableOfContents, ChevronDown, ChevronUp } from "lucide-react"; // Import icons
 
 interface Heading {
   id: string;
@@ -26,6 +27,7 @@ const extractHeadings = (markdown: string) => {
 const TableOfContents: React.FC<{ markdown: string }> = ({ markdown }) => {
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null); // State for active heading
+  const [isVisible, setIsVisible] = useState(true); // State for TOC visibility
   const pathname = usePathname();
 
   // Scroll to heading when the hash changes
@@ -81,34 +83,54 @@ const TableOfContents: React.FC<{ markdown: string }> = ({ markdown }) => {
   }, [headings]);
 
   return (
-    <nav className="toc border rounded-md bg-slate-100 p-5">
-      <h1>Contents</h1>
-      <ul>
-        {headings.map((heading) => (
-          <li key={heading.id}>
-            <a
-              style={{ marginLeft: heading.level + "rem" }}
-              href={`#${heading.id}`}
-              className={`hover:text-blue-600 mt-3 block m-${
-                heading.level * 4
-              }  ${activeId === heading.id ? "font-bold text-blue-600" : ""}`} // Highlight active heading
-              target="_self"
-              rel="noopener noreferrer"
-              title={`Jump to ${heading.text}`}
-              onClick={(e) => {
-                e.preventDefault(); // Prevent default link behavior
-                const element = document.getElementById(heading.id);
-                if (element) {
-                  element.scrollIntoView({ behavior: "smooth" });
-                }
-                window.history.pushState(null, "", `#${heading.id}`); // Update the URL hash
-              }}
-            >
-              {heading.text.replace(/\*\*/g, "")}
-            </a>
-          </li>
-        ))}
-      </ul>
+    <nav className="toc border rounded-md bg-slate-100 p-5 mt-10">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl flex items-center gap-4 font-bold">
+          <LucideTableOfContents />
+          Contents
+        </h1>
+        {/* Show/Hide button */}
+        <button
+          onClick={() => setIsVisible(!isVisible)}
+          className="text-gray-600 hover:text-gray-800 bg-slate-200 p-1 rounded-full focus:outline-none"
+          aria-label={
+            isVisible ? "Hide Table of Contents" : "Show Table of Contents"
+          }
+        >
+          {isVisible ? <ChevronUp /> : <ChevronDown />}
+        </button>
+      </div>
+      {/* Conditionally render the content */}
+      {isVisible && (
+        <ul className="mt-3">
+          {headings.map((heading) => (
+            <li key={heading.id}>
+              <a
+                style={{ marginLeft: heading.level + "rem" }}
+                href={`#${heading.id}`}
+                className={`hover:text-blue-600 block mt-3 ${
+                  activeId === heading.id ? "font-bold text-blue-600" : ""
+                }`} // Highlight active heading
+                target="_self"
+                rel="noopener noreferrer"
+                title={`Jump to ${heading.text}`}
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent default link behavior
+                  const element = document.getElementById(heading.id);
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                  window.history.pushState(null, "", `#${heading.id}`); // Update the URL hash
+                }}
+              >
+                <div className="truncate">
+                  {heading.text.replace(/\*\*/g, "")}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </nav>
   );
 };

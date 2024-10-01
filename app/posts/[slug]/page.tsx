@@ -180,7 +180,7 @@ const PostPage = async ({ params }: PostPageProps) => {
           </Markdown>
         </article>
       </div>
-      <aside className="w-1/4 sticky top-20 h-screen hidden md:block">
+      <aside className="w-1/4 sticky top-20 h-screen hidden lg:block">
         <TableOfContents markdown={post.markdown} />
       </aside>
     </div>
