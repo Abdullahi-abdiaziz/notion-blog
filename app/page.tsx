@@ -63,7 +63,7 @@ export default async function Page({ searchParams }: SearchProps) {
   );
 
   return (
-    <section className="min-h-screen md:max-w-screen-xl mx-auto">
+    <section className="min-h-screen max-w-screen-2xl mx-auto">
       <header className="mb-8 my-20 p-4 container">
         <h1 className="text-2xl md:text-3xl font-bold mb-2">
           Welcome to Our Tech Blog
@@ -76,7 +76,7 @@ export default async function Page({ searchParams }: SearchProps) {
       {/* Search Form */}
       <SearchForm />
 
-      <h2 className="flex items-center gap-1 mx-5 font-extrabold text-xl container">
+      <h2 className="flex items-center gap-2 mx-5 font-extrabold text-xl container bg-gray-100 rounded-md w-fit px-2 py-1">
         <Forward size={25} />
         Recent Posts
       </h2>

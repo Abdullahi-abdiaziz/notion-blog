@@ -5,10 +5,10 @@ import React from "react";
 const Header = () => {
   return (
     <header className="border-b py-3 px-4">
-      <div className="max-w-7xl mx-auto">
+      <div className="md:max-w-6xl lg:max-w-[100rem]  mx-auto px-1">
         <div className="flex items-center justify-between">
-          <Link href={"/"}>
-            <Image src={"/image.png"} width={90} height={50} alt="logo" />
+          <Link href={"/"} className="text-3xl font-extrabold">
+            BLOG.
           </Link>
           <nav className="flex gap-4 sm:gap-6 lg:gap-10 ">
             <Link href={"/"} className="hover:text-primary">

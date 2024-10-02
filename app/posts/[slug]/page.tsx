@@ -1,14 +1,15 @@
-import { Metadata } from "next";
-import NotionService from "../../../services/notion-service";
-import Image from "next/image";
-import dynamic from "next/dynamic";
 import React from "react";
+import Image from "next/image";
+import { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { BlogPost } from "@/types/schema";
 import type { PostPage } from "@/types/schema";
+import { extractId } from "@/services/extract-id";
+import NotionService from "@/services/notion-service";
+import { extractHeadings } from "@/services/extract-heading";
 
-// Lazy load the TableOfContents component
 const TableOfContents = dynamic(
   () => import("../../../components/TableOfContent"),
   {
@@ -20,7 +21,6 @@ interface PostPageProps {
   params: { slug: string };
 }
 
-// Fetch metadata for SEO
 export async function generateMetadata({
   params,
 }: PostPageProps): Promise<Metadata> {
@@ -59,51 +59,6 @@ export async function generateMetadata({
   };
 }
 
-const extractId = (
-  children: React.ReactNode,
-  headings: { level: number; text: string; id: string }[],
-  level: number
-): string => {
-  const text = React.Children.toArray(children)
-    .map((child) =>
-      typeof child === "string"
-        ? child
-        : (child as React.ReactElement)?.props?.children ?? ""
-    )
-    .filter(Boolean)
-    .join("")
-    .trim();
-
-  const kebabCaseText = text
-    .replace(/[^\w\s/.]+/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/[/.]+/g, "-")
-    .replace(/--+/g, "-")
-    .toLowerCase();
-
-  const matchingHeading = headings.find(
-    (heading) => heading.level === level && heading.text === text
-  );
-
-  return matchingHeading?.id ?? kebabCaseText;
-};
-
-const extractHeadings = (markdown: string) => {
-  const headingMatches = markdown?.match(/^(#{1,6})\s+(.*)$/gm);
-  if (!headingMatches) return [];
-
-  return headingMatches.map((heading) => {
-    const level = heading.indexOf(" ") - 1;
-    const text = heading.replace(/^#+\s/, "").trim();
-
-    const lower = text.replace(/[^\w]+/g, "-").toLowerCase();
-    const id = lower.replace(/^-+|-+$/g, "");
-
-    return { level, text, id };
-  });
-};
-
-// Pre-build paths for all posts
 export async function generateStaticParams() {
   const notionService = new NotionService();
   const posts = await notionService.getBlogPosts();
@@ -113,7 +68,6 @@ export async function generateStaticParams() {
   }));
 }
 
-// Fetch post data on the server
 const PostPage = async ({ params }: PostPageProps) => {
   const notionService = new NotionService();
   const post = await notionService.getPostBySlug(params.slug);
@@ -125,7 +79,7 @@ const PostPage = async ({ params }: PostPageProps) => {
   const headings = extractHeadings(post?.markdown);
 
   return (
-    <div className="max-w-screen-2xl my-10 mx-auto flex gap-4">
+    <div className="max-w-screen-2xl my-10 mx-auto flex gap-10">
       {/* Main Content */}
       <div className="w-full md:w-3/4">
         <h1 className="text-center text-2xl md:text-3xl lg:text-4xl font-extrabold space-y-2">
@@ -192,7 +146,9 @@ const PostPage = async ({ params }: PostPageProps) => {
           </Markdown>
         </article>
       </div>
-      <aside className="w-1/4 sticky top-20 h-screen hidden lg:block">
+      <aside className="w-1/4 sticky top-10  h-screen hidden lg:block">
+        {/* author */}
+
         <TableOfContents markdown={post?.markdown} />
       </aside>
     </div>

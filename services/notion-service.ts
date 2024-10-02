@@ -98,6 +98,7 @@ export default class NotionService {
       cover,
       slug: page.properties?.Slug?.formula?.string || "",
       date: page.properties?.Updated?.last_edited_time || "",
+      author: page.properties?.Author?.[0]?.plain_text || "",
     };
   }
 }
