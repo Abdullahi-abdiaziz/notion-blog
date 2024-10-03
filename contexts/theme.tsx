@@ -18,9 +18,7 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<string>(
-    localStorage.getItem("theme") || "light"
-  );
+  const [theme, setTheme] = useState<string>("light");
 
   // Load the theme from localStorage when the app starts
   useEffect(() => {
