@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { ThemeProvider } from "@/contexts/theme";
 import { Raleway } from "next/font/google";
 
 const raleway = Raleway({ subsets: ["latin"] });
@@ -17,12 +18,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${raleway.className} antialiased`}>
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <ThemeProvider>
+      <html lang="en">
+        <body
+          className={`${raleway.className} antialiased bg-slate-50 dark:bg-slate-950`}
+        >
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </ThemeProvider>
   );
 }

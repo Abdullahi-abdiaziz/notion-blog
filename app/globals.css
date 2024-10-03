@@ -3,20 +3,11 @@
 @tailwind utilities;
 
 pre {
-  @apply text-sm;
-  font-family: monospace;
-  padding: 1rem;
-  background-color: #f7f9fa;
-  border-radius: 0.5rem;
-  overflow-x: auto;
+  @apply text-sm bg-red-200 p-0;
 }
 
 code {
-  @apply text-xs;
-  font-family: monospace;
-  padding: 0.25rem 0.5rem;
-  background-color: #f7f9fa;
-  border-radius: 0.25rem;
+  @apply text-xs bg-transparent;
 }
 
 @layer base {

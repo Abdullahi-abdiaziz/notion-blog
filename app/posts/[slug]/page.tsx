@@ -84,7 +84,7 @@ const PostPage = async ({ params }: PostPageProps) => {
     <div className="max-w-screen-2xl my-10 mx-auto flex gap-10">
       {/* Main Content */}
       <div className="w-full md:w-3/4">
-        <h1 className="text-center text-2xl md:text-3xl lg:text-4xl font-extrabold space-y-2">
+        <h1 className="text-center text-2xl md:text-3xl lg:text-4xl font-extrabold space-y-2 text-gray-900 dark:text-gray-100">
           {post?.post.title}
         </h1>
         <Image
@@ -118,21 +118,33 @@ const PostPage = async ({ params }: PostPageProps) => {
           </p>
         </div>
 
-        <article className="prose text-sm md:text-base lg:text-lg mx-auto max-w-5xl mt-10 px-5">
+        <article className="prose text-sm md:text-base lg:text-lg mx-auto max-w-5xl mt-10 px-5 text-gray-700 dark:text-gray-300">
           <Markdown
             remarkPlugins={[remarkGfm]}
             components={{
               h1: ({ children }) => {
                 const id = extractId(children, headings, 1);
-                return <h1 id={id}>{children}</h1>;
+                return (
+                  <h1 id={id} className="text-gray-900 dark:text-gray-100">
+                    {children}
+                  </h1>
+                );
               },
               h2: ({ children }) => {
                 const id = extractId(children, headings, 2);
-                return <h2 id={id}>{children}</h2>;
+                return (
+                  <h2 id={id} className="text-gray-900 dark:text-gray-100">
+                    {children}
+                  </h2>
+                );
               },
               h3: ({ children }) => {
                 const id = extractId(children, headings, 3);
-                return <h3 id={id}>{children}</h3>;
+                return (
+                  <h3 id={id} className="text-gray-900 dark:text-gray-100">
+                    {children}
+                  </h3>
+                );
               },
               code({ className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || "");
@@ -142,11 +154,17 @@ const PostPage = async ({ params }: PostPageProps) => {
                     children={String(children).replace(/\n$/, "")}
                     theme={xonokai}
                     style={xonokai as any}
+                    className={"bg-transparent"}
                     language={match[1]}
                     {...props}
                   />
                 ) : (
-                  <code className={className} {...props}>
+                  <code
+                    className={
+                      "bg-green-100 text-red-600 px-2 py-0.5 rounded-sm"
+                    }
+                    {...props}
+                  >
                     {children}
                   </code>
                 );

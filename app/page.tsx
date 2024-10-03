@@ -76,7 +76,7 @@ export default async function Page({ searchParams }: SearchProps) {
       {/* Search Form */}
       <SearchForm />
 
-      <h2 className="flex items-center gap-2 mx-5 font-extrabold text-xl container bg-gray-100 rounded-md w-fit px-2 py-1">
+      <h2 className="flex items-center gap-2 mx-5 font-extrabold text-xl container bg-gray-100 dark:bg-gray-900 dark:text-white rounded-md w-fit px-2 py-1">
         <Forward size={25} />
         Recent Posts
       </h2>
@@ -100,14 +100,14 @@ export default async function Page({ searchParams }: SearchProps) {
                 )}
 
                 <div className="px-4 py-4">
-                  <p className="mb-2 text-xs font-medium text-gray-500">
+                  <p className="mb-2 text-xs font-medium text-gray-500 dark:text-gray-400">
                     {new Date(post.date).toLocaleDateString("en-US", {
                       day: "numeric",
                       month: "long",
                       year: "numeric",
                     })}
                   </p>
-                  <h3 className="text-lg font-semibold mb-2 text-gray-800 line-clamp-2">
+                  <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200 line-clamp-2">
                     {post.title}
                   </h3>
                   <div className="mb-2 absolute bottom-0">
