@@ -137,10 +137,11 @@ const PostPage = async ({ params }: PostPageProps) => {
               code({ className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || "");
                 return match ? (
+                  // @ts-ignore
                   <SyntaxHighlighter
                     children={String(children).replace(/\n$/, "")}
                     theme={xonokai}
-                    style={xonokai}
+                    style={xonokai as any}
                     language={match[1]}
                     {...props}
                   />

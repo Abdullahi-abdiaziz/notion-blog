@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* pre {
+pre {
   @apply text-sm;
   font-family: monospace;
   padding: 1rem;
@@ -17,7 +17,7 @@ code {
   padding: 0.25rem 0.5rem;
   background-color: #f7f9fa;
   border-radius: 0.25rem;
-} */
+}
 
 @layer base {
   :root {
