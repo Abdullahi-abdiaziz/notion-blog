@@ -77,7 +77,7 @@ const TableOfContents: React.FC<{ markdown: string }> = ({ markdown }) => {
             <a
               style={{ marginLeft: heading.level + "rem" }}
               href={`#${heading.id}`}
-              className={`hover:text-blue-600 block mt-3 text-gray-500 ${
+              className={`text-sm hover:text-gray-800 block mt-3 text-gray-500 ${
                 activeId === heading.id ? "font-bold text-gray-900" : ""
               }`} // Highlight active heading
               target="_self"

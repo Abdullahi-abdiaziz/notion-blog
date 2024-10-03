@@ -4,6 +4,8 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { xonokai } from "react-syntax-highlighter/dist/esm/styles/prism"; // Import theme
 import { BlogPost } from "@/types/schema";
 import type { PostPage } from "@/types/schema";
 import { extractId } from "@/services/extract-id";
@@ -132,13 +134,21 @@ const PostPage = async ({ params }: PostPageProps) => {
                 const id = extractId(children, headings, 3);
                 return <h3 id={id}>{children}</h3>;
               },
-              h4: ({ children }) => {
-                const id = extractId(children, headings, 4);
-                return <h4 id={id}>{children}</h4>;
-              },
-              h5: ({ children }) => {
-                const id = extractId(children, headings, 5);
-                return <h5 id={id}>{children}</h5>;
+              code({ className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || "");
+                return match ? (
+                  <SyntaxHighlighter
+                    children={String(children).replace(/\n$/, "")}
+                    theme={xonokai}
+                    style={xonokai}
+                    language={match[1]}
+                    {...props}
+                  />
+                ) : (
+                  <code className={className} {...props}>
+                    {children}
+                  </code>
+                );
               },
             }}
           >
@@ -147,8 +157,7 @@ const PostPage = async ({ params }: PostPageProps) => {
         </article>
       </div>
       <aside className="w-1/4 sticky top-10  h-screen hidden lg:block">
-        {/* author */}
-
+        {/* Table of contents */}
         <TableOfContents markdown={post?.markdown} />
       </aside>
     </div>
