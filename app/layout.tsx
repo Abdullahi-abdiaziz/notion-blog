@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import { ThemeProvider } from "@/contexts/theme";
 import { Raleway } from "next/font/google";
 
-const raleway = Raleway({ subsets: ["latin"] });
+const raleway = Raleway({ subsets: ["latin"], weight: ["300", "500"] });
 
 export const metadata: Metadata = {
   title: "Notion Blog",
@@ -20,12 +20,14 @@ export default function RootLayout({
   return (
     <ThemeProvider>
       <html lang="en">
-        <body
-          className={`${raleway.className} antialiased bg-slate-50 dark:bg-slate-950`}
-        >
-          <Header />
-          {children}
-          <Footer />
+        <body>
+          <div
+            className={`${raleway.className} font-sans bg-slate-100 dark:bg-slate-900`}
+          >
+            <Header />
+            {children}
+            <Footer />
+          </div>
         </body>
       </html>
     </ThemeProvider>

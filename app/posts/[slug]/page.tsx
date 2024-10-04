@@ -81,18 +81,18 @@ const PostPage = async ({ params }: PostPageProps) => {
   const headings = extractHeadings(post?.markdown);
 
   return (
-    <div className="max-w-screen-2xl my-10 mx-auto flex gap-10">
+    <div className="max-w-screen-2xl my-10 mx-auto flex gap-10 *:text-gray-900 dark:text-gray-100">
       {/* Main Content */}
       <div className="w-full md:w-3/4">
-        <h1 className="text-center text-2xl md:text-3xl lg:text-4xl font-extrabold space-y-2 text-gray-900 dark:text-gray-100">
+        <h1 className="text-center text-2xl md:text-3xl lg:text-4xl font-extrabold space-y-2 text-gray-900 dark:text-gray-100 mb-4">
           {post?.post.title}
         </h1>
         <Image
           className="rounded-xl my-10 px-2"
           src={post?.post.cover}
           alt={post?.post.title}
-          width={800}
-          height={300}
+          width={500}
+          height={100}
           layout="responsive"
           style={{ objectFit: "cover" }}
           priority={true}
@@ -118,7 +118,7 @@ const PostPage = async ({ params }: PostPageProps) => {
           </p>
         </div>
 
-        <article className="prose text-sm md:text-base lg:text-lg mx-auto max-w-5xl mt-10 px-5 text-gray-700 dark:text-gray-300">
+        <article className="prose prose-pre:bg-transparent prose-blockquote:bg-green-50 prose-blockquote:px-4 prose-blockquote:py-0.5 prose-blockquote:rounded-sm prose-blockquote:dark:bg-green-950 prose-blockquote:dark:text-white prose-blockquote:border-l-2 prose-blockquote:border-lime-400  text-sm md:text-base lg:text-lg mx-auto max-w-5xl mt-10 px-5 text-gray-700 dark:text-gray-300">
           <Markdown
             remarkPlugins={[remarkGfm]}
             components={{
@@ -146,6 +146,15 @@ const PostPage = async ({ params }: PostPageProps) => {
                   </h3>
                 );
               },
+              h4: ({ children }) => {
+                const id = extractId(children, headings, 4);
+                return (
+                  <h4 id={id} className="text-gray-900 dark:text-gray-100">
+                    {children}
+                  </h4>
+                );
+              },
+
               code({ className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || "");
                 return match ? (

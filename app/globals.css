@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-pre {
-  @apply text-sm bg-red-200 p-0;
-}
+/* pre {
+  @apply text-xs bg-red-200 p-0 font-thin font-mono;
+} */
 
-code {
-  @apply text-xs bg-transparent;
+strong {
+  @apply dark:text-white;
 }
 
 @layer base {

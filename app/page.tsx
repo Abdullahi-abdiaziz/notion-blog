@@ -63,7 +63,7 @@ export default async function Page({ searchParams }: SearchProps) {
   );
 
   return (
-    <section className="min-h-screen max-w-screen-2xl mx-auto">
+    <section className="min-h-screen max-w-screen-2xl mx-auto my-10">
       <header className="mb-8 my-20 p-4 container">
         <h1 className="text-2xl md:text-3xl font-bold mb-2">
           Welcome to Our Tech Blog
@@ -74,7 +74,7 @@ export default async function Page({ searchParams }: SearchProps) {
       </header>
 
       {/* Search Form */}
-      <SearchForm />
+      {/* <SearchForm /> */}
 
       <h2 className="flex items-center gap-2 mx-5 font-extrabold text-xl container bg-gray-100 dark:bg-gray-900 dark:text-white rounded-md w-fit px-2 py-1">
         <Forward size={25} />
@@ -85,9 +85,9 @@ export default async function Page({ searchParams }: SearchProps) {
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
             <Link key={post.id} href={`/posts/${post.slug}`}>
-              <article className="border mx-auto rounded-md shadow-md w-ful h-[23rem] sm:h-[25rem] lg:h-[28rem] sm:w-[22rem] lg:w-[25rem] relative">
+              <article className="border mx-auto rounded-md shadow-md w-ful h-[22rem] sm:h-[24rem] lg:h-[26rem] sm:w-[22rem] lg:w-[25rem] relative dark:bg-slate-900">
                 {post.cover && (
-                  <div className="w-full h-48 sm:h-56 md:h-64 lg:h-72 border-b rounded-t-md overflow-hidden">
+                  <div className="w-full h-48 sm:h-48 md:h-56 lg:h-64 border-b rounded-t-md overflow-hidden">
                     <Image
                       src={post.cover}
                       alt="Post cover"

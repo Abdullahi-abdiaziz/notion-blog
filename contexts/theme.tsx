@@ -28,7 +28,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  // Update the body class to reflect the selected theme
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);

@@ -70,7 +70,9 @@ const TableOfContents: React.FC<{ markdown: string }> = ({ markdown }) => {
   return (
     <nav className="toc rounded-md p-5 mt-10">
       {/* Conditionally render the content */}
-      <h3 className="font-bold text-xl mb-3">Table of Contents</h3>
+      <h3 className="font-bold text-xl mb-3 dark:text-white">
+        Table of Contents
+      </h3>
       <ul className="mt-3">
         {headings.map((heading) => (
           <li key={heading.id}>
@@ -79,7 +81,7 @@ const TableOfContents: React.FC<{ markdown: string }> = ({ markdown }) => {
               href={`#${heading.id}`}
               className={`text-sm hover:text-gray-800 dark:hover:text-gray-200 block mt-3 text-gray-600 dark:text-gray-400 ${
                 activeId === heading.id
-                  ? "font-bold text-gray-900 dark:text-gray-100"
+                  ? "font-bold text-gray-900 dark:text-white"
                   : ""
               }`} // Highlight active heading
               target="_self"
