@@ -24,7 +24,7 @@ const Footer = () => {
             Contact
           </Link>
         </nav>
-        <p className="text-gray-400">
+        <p className="text-gray-700 dark:text-gray-300">
           &copy; {new Date().getFullYear()} Blog. All rights reserved.
         </p>
       </div>

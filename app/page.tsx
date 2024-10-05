@@ -1,22 +1,13 @@
 import NotionService from "@/services/notion-service";
 import { BlogPost } from "@/types/schema";
 import Link from "next/link";
-import SearchForm from "@/components/searchForm";
 import { Forward } from "lucide-react";
-import { Metadata } from "next";
 import Image from "next/image";
-
-interface SearchProps {
-  searchParams?: { search?: string };
-}
+import BlurFade from "@/components/ui/blur-fade";
+import PostCard from "@/components/PostCard";
 
 // Generate dynamic metadata
-export async function generateMetadata({
-  searchParams,
-}: SearchProps): Promise<Metadata> {
-  const notionService = new NotionService();
-  const posts: BlogPost[] = await notionService.getBlogPosts();
-
+export async function generateMetadata() {
   // Determine meta tags based on search results or general blog information
   const title = "Kawtech | Blog - Stay Updated with the Latest in Tech";
   const description =
@@ -48,85 +39,54 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ searchParams }: SearchProps) {
+export default async function Page() {
   const notionService = new NotionService();
-  const posts: BlogPost[] = await notionService.getBlogPosts();
+  const posts: BlogPost[] = await notionService.getBlogPosts({
+    revalidate: 60,
+  });
 
-  const searchTerm = searchParams?.search?.toLowerCase() || "";
-
-  // Filter posts based on search term
-  const filteredPosts = posts.filter(
-    (post) =>
-      post.title.toLowerCase().includes(searchTerm) ||
-      post.description.toLowerCase().includes(searchTerm) ||
-      post.tags.some((tag) => tag.name.toLowerCase().includes(searchTerm))
-  );
+  const recentPosts = posts.slice(0, 6);
 
   return (
     <section className="min-h-screen max-w-screen-2xl mx-auto my-10">
-      <header className="mb-8 my-20 p-4 container">
-        <h1 className="text-2xl md:text-3xl font-bold mb-2">
-          Welcome to Our Tech Blog
-        </h1>
-        <p className="text-base md:text-xl">
-          Stay updated with the latest in web development and technology
-        </p>
-      </header>
+      <BlurFade delay={0.25} inView>
+        <header className="mb-8 my-20 p-4 container">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            Welcome to Our Tech Blog
+          </h1>
+          <p className="text-base md:text-xl">
+            Stay updated with the latest in web development and technology
+          </p>
+        </header>
+      </BlurFade>
 
-      {/* Search Form */}
-      {/* <SearchForm /> */}
-
-      <h2 className="flex items-center gap-2 mx-5 font-extrabold text-xl container bg-gray-100 dark:bg-gray-900 dark:text-white rounded-md w-fit px-2 py-1">
-        <Forward size={25} />
-        Recent Posts
-      </h2>
+      <BlurFade delay={0.5} inView>
+        <h2 className="flex items-center gap-2 mx-5 font-extrabold text-xl container bg-gray-100 dark:bg-gray-900 dark:text-white rounded-md w-fit px-2 py-1">
+          <Forward size={25} />
+          Recent Posts
+        </h2>
+      </BlurFade>
 
       <div className="mx-auto flex flex-wrap gap-8 py-8 px-5">
-        {filteredPosts.length > 0 ? (
-          filteredPosts.map((post) => (
+        {posts.length > 0 ? (
+          recentPosts.map((post) => (
             <Link key={post.id} href={`/posts/${post.slug}`}>
-              <article className="border mx-auto rounded-md shadow-md w-ful h-[22rem] sm:h-[24rem] lg:h-[26rem] sm:w-[22rem] lg:w-[25rem] relative dark:bg-slate-900">
-                {post.cover && (
-                  <div className="w-full h-48 sm:h-48 md:h-56 lg:h-64 border-b rounded-t-md overflow-hidden">
-                    <Image
-                      src={post.cover}
-                      alt="Post cover"
-                      width={420}
-                      height={270}
-                      priority
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                )}
-
-                <div className="px-4 py-4">
-                  <p className="mb-2 text-xs font-medium text-gray-500 dark:text-gray-400">
-                    {new Date(post.date).toLocaleDateString("en-US", {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  </p>
-                  <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200 line-clamp-2">
-                    {post.title}
-                  </h3>
-                  <div className="mb-2 absolute bottom-0">
-                    {post.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="inline-block text-sm bg-green-100 text-green-900 px-2 py-0.5 rounded-md mr-2 mb-2"
-                      >
-                        {tag.name.toLowerCase()}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </article>
+              <BlurFade delay={0.75} inView>
+                <PostCard post={post} markdown={""} />
+              </BlurFade>
             </Link>
           ))
         ) : (
-          <p>No posts found for "{searchTerm}".</p>
+          <p>No posts published yet!.</p>
         )}
+      </div>
+      <div className="flex justify-center items-start mb-5">
+        <Link
+          href={"/posts"}
+          className="text-lg text-cyan-600 font-bold hover:underline "
+        >
+          show all posts
+        </Link>
       </div>
     </section>
   );
