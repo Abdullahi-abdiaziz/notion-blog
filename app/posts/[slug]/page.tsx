@@ -64,7 +64,9 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const notionService = new NotionService();
-  const posts = await notionService.getBlogPosts({ revalidate: 60 });
+  const posts = await notionService.getBlogPosts({
+    next: { revalidate: 5 },
+  });
 
   return posts.map((post: BlogPost) => ({
     slug: post.slug,

@@ -8,11 +8,11 @@ import React from "react";
 const page = async () => {
   const notionServices = new NotionService();
   const posts: BlogPost[] = await notionServices.getBlogPosts({
-    revalidate: 60,
+    next: { revalidate: 5 },
   });
 
   return (
-    <section className="min-h-screen max-w-screen-2xl mx-auto my-16">
+    <section className="min-h-screen max-w-screen-2xl mx-auto my-16 px-5">
       <BlurFade delay={0.25} inView>
         <h1 className="text-3xl md:text-4xl font-bold mb-10 ">
           Latest Blog Posts

@@ -4,7 +4,7 @@ import React from "react";
 
 const PostCard = ({ post }: PostPage) => {
   return (
-    <article className="border mx-auto rounded-md shadow-md w-ful h-[22rem] sm:h-[24rem] lg:h-[26rem] sm:w-[22rem] lg:w-[25rem] relative dark:bg-slate-900 hover:scale-105 transition-all duration-200">
+    <article className="border-[3px] border-gray-200 dark:border-gray-800 mx-auto rounded-md shadow-md w-ful h-[22rem] sm:h-[24rem] lg:h-[26rem] sm:w-[22rem] lg:w-[25rem] relative dark:bg-slate-900 hover:scale-105 transition-all duration-200">
       {post.cover && (
         <div className="w-full h-48 sm:h-48 md:h-56 lg:h-64 border-b rounded-t-md overflow-hidden">
           <Image

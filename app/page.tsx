@@ -42,7 +42,7 @@ export async function generateMetadata() {
 export default async function Page() {
   const notionService = new NotionService();
   const posts: BlogPost[] = await notionService.getBlogPosts({
-    revalidate: 60,
+    next: { revalidate: 5 },
   });
 
   const recentPosts = posts.slice(0, 6);
@@ -83,7 +83,7 @@ export default async function Page() {
       <div className="flex justify-center items-start mb-5">
         <Link
           href={"/posts"}
-          className="text-lg text-cyan-600 font-bold hover:underline "
+          className="text-lg text-blue-500 font-bold hover:underline "
         >
           show all posts
         </Link>
