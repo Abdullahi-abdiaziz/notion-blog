@@ -22,7 +22,7 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <div
-            className={`${raleway.className} font-sans bg-slate-100 dark:bg-slate-900`}
+            className={`${raleway.className} font-sans bg-slate-50 dark:bg-slate-900`}
           >
             <Header />
             {children}

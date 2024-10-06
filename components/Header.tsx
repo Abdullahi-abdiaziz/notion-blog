@@ -8,7 +8,7 @@ import { MoonIcon, SunIcon } from "lucide-react";
 const Header = () => {
   const { theme, setTheme } = useTheme();
   return (
-    <header className="border-b py-3 px-4 bg-gray-50 dark:bg-gray-950 m-0">
+    <header className="border-b py-3 px-4 bg-gray-100 dark:bg-gray-950 m-0">
       <div className="md:max-w-6xl lg:max-w-[100rem] mx-auto px-1">
         <div className="flex items-center justify-between">
           <Logo />

@@ -8,7 +8,7 @@ const lato = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
 const Footer = () => {
   return (
-    <footer className="border-t py-6 px-4 bg-gray-50 dark:bg-gray-950">
+    <footer className="border-t py-6 px-4 bg-gray-100 dark:bg-gray-950">
       <div className="max-w-screen-2xl mx-auto px-2 flex flex-col md:flex-row justify-between items-center">
         <div className="mb-4 md:mb-0">
           <Logo />
