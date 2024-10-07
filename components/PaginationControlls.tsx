@@ -1,12 +1,6 @@
 "use client";
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import {
-  DoubleArrowLeftIcon,
-  DoubleArrowRightIcon,
-  TrackNextIcon,
-  TrackPreviousIcon,
-} from "@radix-ui/react-icons";
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
 
 type PaginationProps = {
@@ -36,8 +30,9 @@ const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
         <BiSolidLeftArrow />
       </button>
 
-      <div>
-        page {page} of {Math.ceil(10 / Number(per_page))}
+      <div className="text-black dark:text-white">
+        page <span className="font-bold">{page}</span> of{" "}
+        <span className="font-bold">{Math.ceil(10 / Number(per_page))}</span>
       </div>
 
       <button

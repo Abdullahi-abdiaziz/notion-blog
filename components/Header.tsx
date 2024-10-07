@@ -4,22 +4,42 @@ import React from "react";
 import { useTheme } from "@/contexts/theme";
 import Logo from "./Logo";
 import { MoonIcon, SunIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
+
   return (
     <header className="border-b py-3 px-4 bg-gray-100 dark:bg-gray-950 m-0">
       <div className="md:max-w-6xl lg:max-w-[100rem] mx-auto px-1">
         <div className="flex items-center justify-between">
           <Logo />
-          <nav className="flex gap-4 sm:gap-6 lg:gap-10 items-center">
-            <Link href={"/"} className="hover:text-primary">
+          <nav className="flex gap-2 sm:gap-6 lg:gap-10 items-center">
+            <Link
+              href={"/"}
+              className={`${
+                pathname === "/" && "font-bold underline underline-offset-2"
+              } hover:text-slate-700`}
+            >
               Home
             </Link>
-            <Link href={"/posts"} className="hover:text-primary">
+            <Link
+              href={"/posts"}
+              className={`${
+                pathname === "/posts" &&
+                "font-bold underline underline-offset-2"
+              } hover:text-slate-700`}
+            >
               Posts
             </Link>
-            <Link href={"/contacts"} className="hover:text-primary">
+            <Link
+              href={"/contact"}
+              className={`${
+                pathname === "/contact" &&
+                "font-bold underline underline-offset-2"
+              } hover:text-slate-700`}
+            >
               Contact
             </Link>
 

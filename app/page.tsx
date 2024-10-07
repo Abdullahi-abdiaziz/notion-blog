@@ -52,7 +52,7 @@ export default async function Page() {
       <BlurFade delay={0.25} inView>
         <header className="mb-8 my-20 p-4 container">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">
-            Welcome to Our Tech Blog
+            Welcome to Our Kawtech Tech Blog
           </h1>
           <p className="text-base md:text-xl">
             Stay updated with the latest in web development and technology
@@ -83,7 +83,7 @@ export default async function Page() {
       <div className="flex justify-center items-start mb-5">
         <Link
           href={"/posts"}
-          className="text-lg text-blue-500 font-bold hover:underline "
+          className="text-lg text-gray-700 dark:text-gray-400 hover:text-blue-500 font-bold hover:underline "
         >
           show all posts
         </Link>

@@ -7,7 +7,7 @@ const bungee = Bungee_Spice({ subsets: ["latin"], weight: "400" });
 const Logo = () => {
   return (
     <Link href={"/"} className={`${bungee.className} text-3xl font-extrabold`}>
-      BLOG.
+      KAWTECH.
     </Link>
   );
 };
