@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { xonokai } from "react-syntax-highlighter/dist/esm/styles/prism"; // Import theme
+import { xonokai } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { BlogPost } from "@/types/schema";
 import type { PostPage } from "@/types/schema";
 import { extractId } from "@/services/extract-id";
