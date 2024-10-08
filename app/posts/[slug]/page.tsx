@@ -160,14 +160,7 @@ const PostPage = async ({ params }: PostPageProps) => {
                     </h4>
                   );
                 },
-                video: ({ node }) => {
-                  return (
-                    <source
-                      src={node?.properties?.url?.toString()}
-                      type="video/mp4"
-                    />
-                  );
-                },
+
                 code({ className, children, ...props }) {
                   const match = /language-(\w+)/.exec(className || "");
                   return match ? (
@@ -183,7 +176,7 @@ const PostPage = async ({ params }: PostPageProps) => {
                   ) : (
                     <code
                       className={
-                        "bg-green-100 text-red-600 px-2 py-0.5 rounded-sm"
+                        "bg-gray-300 text-gray-900 px-2 font-bold font-geist text-sm py-0.5 rounded-sm"
                       }
                       {...props}
                     >
