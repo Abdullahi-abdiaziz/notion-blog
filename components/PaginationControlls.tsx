@@ -2,6 +2,7 @@
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
+import Link from "next/link";
 
 type PaginationProps = {
   hasNextPage: boolean;
@@ -16,38 +17,42 @@ const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
   const per_page = searchParams.get("per_page") ?? "6";
   return (
     <div className="flex gap-2 items-center justify-center mt-10 bg-green-50 dark:bg-green-950 px-2 py-1 rounded-md w-fit mx-auto">
-      <button
+      <Link
         className={`${
           !hasPrevPage
             ? "text-gray-400 dark:text-gray-600"
             : "text-black dark:text-white"
         } flex justify-center items-center"`}
-        disabled={!hasPrevPage}
-        onClick={() => {
-          router.push(`posts/?page=${Number(page) - 1}&per_page=${per_page}`);
-        }}
+        href={`${
+          hasPrevPage
+            ? `posts/?page=${Number(page) - 1}&per_page=${per_page}`
+            : `posts/?page=${Number(page)}&per_page=${per_page}`
+        }`}
+        {...(hasPrevPage ? {} : { disabled: true })}
       >
         <BiSolidLeftArrow />
-      </button>
+      </Link>
 
       <div className="text-black dark:text-white">
         page <span className="font-bold">{page}</span> of{" "}
         <span className="font-bold">{Math.ceil(10 / Number(per_page))}</span>
       </div>
 
-      <button
+      <Link
         className={`${
           !hasNextPage
             ? "text-gray-400 dark:text-gray-600"
             : "text-black dark:text-white"
         }  flex items-center justify-center"`}
-        disabled={!hasNextPage}
-        onClick={() => {
-          router.push(`posts/?page=${Number(page) + 1}&per_page=${per_page}`);
-        }}
+        href={`${
+          hasNextPage
+            ? `posts/?page=${Number(page) + 1}&per_page=${per_page}`
+            : `posts/?page=${Number(page)}&per_page=${per_page}`
+        }`}
+        {...(hasNextPage ? {} : { disabled: true })}
       >
         <BiSolidRightArrow />
-      </button>
+      </Link>
     </div>
   );
 };
