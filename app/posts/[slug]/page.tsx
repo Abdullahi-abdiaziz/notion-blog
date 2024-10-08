@@ -44,6 +44,8 @@ export async function generateMetadata({
       title: post.post.title,
       description: post.post.description,
       type: "article",
+      url: `https://kawtech.vercel.app/posts/${params.slug}`,
+      siteName: "Kawtech",
       images: [
         {
           url: post.post.cover,
@@ -176,7 +178,7 @@ const PostPage = async ({ params }: PostPageProps) => {
                   ) : (
                     <code
                       className={
-                        "bg-gray-300 text-gray-900 px-2 font-bold font-geist text-sm py-0.5 rounded-sm"
+                        "bg-gray-300 text-gray-900 px-2 font-bold font-mono text-sm py-0.5 rounded-sm"
                       }
                       {...props}
                     >

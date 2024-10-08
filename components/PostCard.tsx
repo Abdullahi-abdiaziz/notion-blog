@@ -13,7 +13,7 @@ const PostCard = ({ post }: PostPage) => {
             width={420}
             height={270}
             priority
-            className="object-fit w-full h-full"
+            className="object-cover w-full h-full"
           />
         </div>
       )}
@@ -33,7 +33,7 @@ const PostCard = ({ post }: PostPage) => {
           {post.tags.map((tag, index) => (
             <span
               key={index}
-              className="inline-block text-sm bg-green-100 text-green-900 px-2 py-0.5 rounded-md mr-2 mb-2"
+              className="inline-block text-sm bg-green-100 text-green-900 px-2 py-0.5  rounded-md mr-2 mb-2"
             >
               {tag.name.toLowerCase()}
             </span>

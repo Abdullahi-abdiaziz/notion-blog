@@ -21,6 +21,8 @@ export async function generateMetadata() {
       title: title,
       description: description,
       type: "website",
+      url: "https://kawtech.vercel.app/",
+      siteName: "Kawtech",
       images: [
         {
           url: defaultImage,
@@ -40,8 +42,8 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const notionService = new NotionService();
-  const posts: BlogPost[] = await notionService.getBlogPosts({
+  const notionServices = new NotionService();
+  const posts: BlogPost[] = await notionServices.getBlogPosts({
     next: { revalidate: 5 },
   });
 
