@@ -13,7 +13,7 @@ export default class NotionService {
     this.database = process.env.NOTION_BLOG_DB_ID ?? "";
   }
 
-  async getBlogPosts(p0?: {
+  async getBlogPosts(_p0?: {
     next: { revalidate: number };
   }): Promise<BlogPost[]> {
     if (!this.database) {

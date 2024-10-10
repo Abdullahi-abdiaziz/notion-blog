@@ -12,6 +12,7 @@ import { extractId } from "@/services/extract-id";
 import NotionService from "@/services/notion-service";
 import { extractHeadings } from "@/services/extract-heading";
 import BlurFade from "@/components/ui/blur-fade";
+import { geist } from "@/app/layout";
 
 const TableOfContents = dynamic(
   () => import("../../../components/TableOfContent"),
@@ -177,9 +178,7 @@ const PostPage = async ({ params }: PostPageProps) => {
                     />
                   ) : (
                     <code
-                      className={
-                        "bg-gray-300 text-gray-900 px-2 font-bold font-mono text-sm py-0.5 rounded-sm"
-                      }
+                      className={`bg-gray-400 dark:bg-gray-300 text-gray-900 dark:text-gray-800 px-2 font-mono font-bold text-xs  py-0.5 rounded-sm`}
                       {...props}
                     >
                       {children}

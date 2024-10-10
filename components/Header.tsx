@@ -5,6 +5,7 @@ import { useTheme } from "@/contexts/theme";
 import Logo from "./Logo";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
+import MenuToggle from "./MenuToggle";
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
@@ -15,34 +16,36 @@ const Header = () => {
       <div className="md:max-w-6xl lg:max-w-[100rem] mx-auto px-1">
         <div className="flex items-center justify-between">
           <Logo />
-          <nav className="flex gap-2 sm:gap-6 lg:gap-10 items-center">
-            <Link
-              href={"/"}
-              className={`${
-                pathname === "/" && "font-bold underline underline-offset-2"
-              } hover:text-slate-700`}
-            >
-              Home
-            </Link>
-            <Link
-              href={"/posts"}
-              className={`${
-                pathname === "/posts" &&
-                "font-bold underline underline-offset-2"
-              } hover:text-slate-700`}
-            >
-              Posts
-            </Link>
-            <Link
-              href={"/contact"}
-              className={`${
-                pathname === "/contact" &&
-                "font-bold underline underline-offset-2"
-              } hover:text-slate-700`}
-            >
-              Contact
-            </Link>
-
+          <div className="flex items-center gap-5">
+            <nav className="md:flex gap-2 sm:gap-6 lg:gap-10 items-center hidden ">
+              <Link
+                href={"/"}
+                className={`${
+                  pathname === "/" && "font-bold underline underline-offset-2"
+                } hover:text-slate-700`}
+              >
+                Home
+              </Link>
+              <Link
+                href={"/posts"}
+                className={`${
+                  pathname === "/posts" &&
+                  "font-bold underline underline-offset-2"
+                } hover:text-slate-700`}
+              >
+                Posts
+              </Link>
+              <Link
+                href={"/contact"}
+                className={`${
+                  pathname === "/contact" &&
+                  "font-bold underline underline-offset-2"
+                } hover:text-slate-700`}
+              >
+                Contact
+              </Link>
+            </nav>
+            <MenuToggle />
             <button
               className="rounded-md bg-gray-200 dark:bg-gray-800 px-2 py-2 text-sm font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-300"
               aria-label="Toggle theme"
@@ -54,7 +57,7 @@ const Header = () => {
                 <SunIcon size={16} />
               )}
             </button>
-          </nav>
+          </div>
         </div>
       </div>
     </header>

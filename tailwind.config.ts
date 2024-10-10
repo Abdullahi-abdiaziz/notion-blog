@@ -55,7 +55,7 @@ const config: Config = {
       fontFamily: {
         sans: ["Inter", "system-ui", "Arial", "sans-serif"],
         mono: ["JetBrains Mono", "SF Mono", "Menlo", "monospace"],
-        geist: ["Geist Mono", "Geist UI Mono", "Geist UI Icons"],
+        geist: ["var(--geist-mono)"],
       },
       borderRadius: {
         lg: "var(--radius)",

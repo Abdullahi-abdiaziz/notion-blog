@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Forward } from "lucide-react";
 import BlurFade from "@/components/ui/blur-fade";
 import PostCard from "@/components/PostCard";
-import { Suspense } from "react";
 
 // Generate dynamic metadata
 export async function generateMetadata() {

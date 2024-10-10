@@ -4,6 +4,15 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { ThemeProvider } from "@/contexts/theme";
 import { Raleway } from "next/font/google";
+import Geist from "next/font/local";
+
+export const geist = Geist({
+  src: "/fonts/GeistMonoVF.woff",
+  variable: "--geist-mono", // CSS variable name (optional)
+  weight: "400", // Define font weight if needed
+  style: "normal", // Define the style (normal, italic, etc.)
+  display: "swap", // Optional (swap, block, fallback)
+});
 
 const raleway = Raleway({ subsets: ["latin"], weight: ["300", "500"] });
 
