@@ -12,7 +12,6 @@ import { extractId } from "@/services/extract-id";
 import NotionService from "@/services/notion-service";
 import { extractHeadings } from "@/services/extract-heading";
 import BlurFade from "@/components/ui/blur-fade";
-import { geist } from "@/app/layout";
 
 const TableOfContents = dynamic(
   () => import("../../../components/TableOfContent"),
