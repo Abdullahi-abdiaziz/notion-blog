@@ -3,7 +3,7 @@ import SocialLinks from "@/components/SocialLinks";
 
 export default function ContactPage() {
   return (
-    <section className="min-h-[75vh] max-w-screen-2xl mx-auto my-24 px-5">
+    <section className="min-h-[65vh] max-w-screen-2xl mx-auto my-24 px-5">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold  text-center underline underline-offset-2 mb-16">
           Contact Us

@@ -55,7 +55,7 @@ export default function ContactForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8 border-2 p-5 rounded-sm"
+        className="space-y-8 border-4 border-gray-400 dark:border-gray-600 p-10 rounded-lg"
       >
         <FormField
           control={form.control}

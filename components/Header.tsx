@@ -22,7 +22,7 @@ const Header = () => {
                 href={"/"}
                 className={`${
                   pathname === "/" && "font-bold underline underline-offset-2"
-                } hover:text-slate-700`}
+                } hover:text-slate-700 dark:hover:text-slate-200`}
               >
                 Home
               </Link>
@@ -31,7 +31,7 @@ const Header = () => {
                 className={`${
                   pathname === "/posts" &&
                   "font-bold underline underline-offset-2"
-                } hover:text-slate-700`}
+                } hover:text-slate-700 dark:hover:text-slate-200`}
               >
                 Posts
               </Link>
@@ -40,7 +40,7 @@ const Header = () => {
                 className={`${
                   pathname === "/contact" &&
                   "font-bold underline underline-offset-2"
-                } hover:text-slate-700`}
+                } hover:text-slate-700 dark:hover:text-slate-200`}
               >
                 Contact
               </Link>
