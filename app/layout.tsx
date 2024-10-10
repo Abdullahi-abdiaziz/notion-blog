@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { ThemeProvider } from "@/contexts/theme";
 import { Raleway } from "next/font/google";
+import { Toaster } from "@/components/ui/toaster";
 
 const raleway = Raleway({ subsets: ["latin"], weight: ["300", "500"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
           >
             <Header />
             {children}
+            <Toaster />
             <Footer />
           </div>
         </body>
