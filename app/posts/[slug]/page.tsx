@@ -111,7 +111,6 @@ const PostPage = async ({ params }: PostPageProps) => {
                 year: "numeric",
               })}
             </p>
-
             <p className="mb-2">
               {post?.post.tags.map((tag, index) => (
                 <span

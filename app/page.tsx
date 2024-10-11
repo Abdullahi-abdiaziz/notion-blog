@@ -70,9 +70,9 @@ export default async function Page() {
 
       <div className="mx-auto flex flex-wrap gap-8 py-8 px-5">
         {posts.length > 0 ? (
-          recentPosts.map((post) => (
+          recentPosts.map((post, index) => (
             <Link key={post.id} href={`/posts/${post.slug}`}>
-              <BlurFade delay={0.75} inView>
+              <BlurFade delay={0.15 * index} inView>
                 <PostCard post={post} markdown={""} />
               </BlurFade>
             </Link>

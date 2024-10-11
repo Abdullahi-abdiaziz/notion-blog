@@ -99,8 +99,8 @@ export default class NotionService {
         page.properties?.Description?.rich_text?.[0]?.plain_text || "",
       cover,
       slug: page.properties?.Slug?.formula?.string || "",
-      date: page.properties?.Updated?.last_edited_time || "",
-      author: page.properties?.Author?.[0]?.plain_text || "",
+      date: page.properties?.Date?.created_time || "",
+      author: page.properties?.Author?.people[0]?.name || "Anonymous",
     };
   }
 }
