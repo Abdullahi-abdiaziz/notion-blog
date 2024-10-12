@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
+    unoptimized: false,
     domains: [
       "kawtech.sirv.com",
       "prod-files-secure.s3.us-west-2.amazonaws.com",
