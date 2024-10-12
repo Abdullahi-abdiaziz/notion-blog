@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "kawtech.sirv",
+        hostname: "kawtech.sirv.com",
         port: "",
         pathname: "/kawtech-blog/thumbnails/**",
       },
