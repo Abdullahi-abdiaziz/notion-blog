@@ -183,6 +183,29 @@ const PostPage = async ({ params }: PostPageProps) => {
                     </code>
                   );
                 },
+                a: ({ href, children }) => {
+                  const isVideo =
+                    href?.includes("youtu.be") || href?.includes("vimeo.com");
+                  return isVideo ? (
+                    <video
+                      src={href}
+                      controls
+                      autoPlay
+                      muted
+                      className="w-full md:w-3/4"
+                      style={{ aspectRatio: "16/9" }} // Ensures a 16:9 aspect ratio
+                      poster={post.post.cover} // Optional: Video poster image
+                    >
+                      {/* Provide different video formats for browser compatibility */}
+                      <source src={href} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  ) : (
+                    <a href={href} target="_blank" rel="noopener noreferrer">
+                      {children}
+                    </a>
+                  );
+                },
               }}
             >
               {post?.markdown}
