@@ -8,7 +8,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "kawtech.sirv.com",
         port: "",
-        pathname: "/kawtech-blog/thumbnails/**",
+        pathname: "/kawtech-blog/**",
       },
     ],
   },
