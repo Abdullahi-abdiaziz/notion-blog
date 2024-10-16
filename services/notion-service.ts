@@ -36,7 +36,10 @@ export default class NotionService {
     });
   }
 
-  async getPostBySlug(slug: string): Promise<PostPage> {
+  async getPostBySlug(
+    slug: string,
+    p0?: { next: { revalidate: number } }
+  ): Promise<PostPage> {
     let post, markdown;
 
     if (!this.database) {

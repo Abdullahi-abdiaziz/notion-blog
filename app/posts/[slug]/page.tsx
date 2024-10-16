@@ -66,9 +66,7 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const notionService = new NotionService();
-  const posts = await notionService.getBlogPosts({
-    next: { revalidate: 5 },
-  });
+  const posts = await notionService.getBlogPosts();
 
   return posts.map((post: BlogPost) => ({
     slug: post.slug,
@@ -77,7 +75,9 @@ export async function generateStaticParams() {
 
 const PostPage = async ({ params }: PostPageProps) => {
   const notionService = new NotionService();
-  const post = await notionService.getPostBySlug(params.slug);
+  const post = await notionService.getPostBySlug(params.slug, {
+    next: { revalidate: 5 },
+  });
 
   if (!post) {
     return <div>Post not found</div>;
