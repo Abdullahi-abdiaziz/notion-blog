@@ -12,6 +12,7 @@ import { extractId } from "@/services/extract-id";
 import NotionService from "@/services/notion-service";
 import { extractHeadings } from "@/services/extract-heading";
 import BlurFade from "@/components/ui/blur-fade";
+import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 
 const TableOfContents = dynamic(
   () => import("../../../components/TableOfContent"),
@@ -187,19 +188,15 @@ const PostPage = async ({ params }: PostPageProps) => {
                   const isVideo =
                     href?.includes("youtu.be") || href?.includes("vimeo.com");
                   return isVideo ? (
-                    <video
-                      src={href}
-                      controls
-                      autoPlay
-                      muted
-                      className="w-full md:w-3/4"
-                      style={{ aspectRatio: "16/9" }} // Ensures a 16:9 aspect ratio
-                      poster={post.post.cover} // Optional: Video poster image
-                    >
-                      {/* Provide different video formats for browser compatibility */}
-                      <source src={href} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
+                    <div className="relative">
+                      <HeroVideoDialog
+                        className="dark:hidden block"
+                        animationStyle="top-in-bottom-out"
+                        videoSrc="https://youtu.be/Q1JdRUh1_98?si=3MriaWGD3Tjn6YPc"
+                        thumbnailSrc={post.post.cover}
+                        thumbnailAlt="Hero Video"
+                      />
+                    </div>
                   ) : (
                     <a href={href} target="_blank" rel="noopener noreferrer">
                       {children}
