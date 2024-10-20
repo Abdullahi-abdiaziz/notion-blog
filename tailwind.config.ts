@@ -62,6 +62,17 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      backgroundImage: {
+        "custom-pattern":
+          "repeating-linear-gradient(45deg, #444cf7 0, #444cf7 1px, #e5e5f7 0, #e5e5f7 50%)",
+      },
+      backgroundSize: {
+        "10px-10px": "15px 15px",
+        "5px-5px": "7px 7px",
+      },
+      backgroundPosition: {
+        "top-left": "top left",
+      },
     },
   },
   plugins: [

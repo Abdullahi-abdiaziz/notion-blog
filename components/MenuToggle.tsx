@@ -11,7 +11,7 @@ const MenuToggle = () => {
   return (
     <div>
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetTrigger className="rounded-md bg-gray-200 dark:bg-gray-800 px-2 py-2 text-sm font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-300 md:hidden">
+        <SheetTrigger className="rounded-md bg-gray-300 dark:bg-gray-700 px-2 py-2 text-sm font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-300 md:hidden">
           <MenuIcon size={16} />
         </SheetTrigger>
         <SheetContent side={"top"}>
@@ -28,8 +28,7 @@ const MenuToggle = () => {
             <Link
               href={"/posts"}
               className={`${
-                pathname === "/posts" &&
-                "font-bold underline underline-offset-2"
+                pathname === "/posts" && "font-bold bg-green-100"
               } hover:text-slate-700`}
               onClick={() => setIsOpen(false)}
             >

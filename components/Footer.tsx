@@ -3,30 +3,37 @@ import Link from "next/link";
 import React from "react";
 import { Lato } from "next/font/google";
 import Logo from "./Logo";
+import { Github, Rss, Twitter } from "lucide-react";
 
 const lato = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
 
 const Footer = () => {
   return (
-    <footer className="border-t py-6 px-4 bg-gray-100 dark:bg-gray-950">
-      <div className="max-w-screen-2xl mx-auto px-2 flex flex-col md:flex-row justify-between items-center">
-        <div className="mb-4 md:mb-0">
-          <Logo />
-        </div>
-        <nav className="flex gap-4">
-          <Link href={"/"} className="hover:text-primary">
-            Home
-          </Link>
-          <Link href={"/posts"} className="hover:text-primary">
-            Posts
-          </Link>
-          <Link href={"/contacts"} className="hover:text-primary">
-            Contact
-          </Link>
-        </nav>
-        <p className="text-gray-700 dark:text-gray-300">
-          &copy; {new Date().getFullYear()} Blog. All rights reserved.
-        </p>
+    <footer className="flex flex-col justify-between gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
+      <p className="text-sm text-gray-500 dark:text-gray-400">
+        © 2023 TechBlog. All rights reserved.
+      </p>
+      <nav className=" flex gap-4 sm:gap-6">
+        <Link className="text-sm hover:underline underline-offset-4" href="#">
+          Terms of Service
+        </Link>
+        <Link className="text-sm hover:underline underline-offset-4" href="#">
+          Privacy
+        </Link>
+      </nav>
+      <div className="flex items-center space-x-4 ">
+        <Link href="#">
+          <Rss className="h-5 w-5" />
+          <span className="sr-only">RSS</span>
+        </Link>
+        <Link href="#">
+          <Twitter className="h-5 w-5" />
+          <span className="sr-only">Twitter</span>
+        </Link>
+        <Link href="#">
+          <Github className="h-5 w-5" />
+          <span className="sr-only">GitHub</span>
+        </Link>
       </div>
     </footer>
   );

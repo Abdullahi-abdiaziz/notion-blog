@@ -2,8 +2,18 @@ import PaginationControlls from "@/components/PaginationControlls";
 import PostCard from "@/components/PostCard";
 import SearchForm from "@/components/searchForm";
 import BlurFade from "@/components/ui/blur-fade";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import NotionService from "@/services/notion-service";
 import { BlogPost } from "@/types/schema";
+import { Badge, MoveRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -18,7 +28,7 @@ const page = async ({
   });
 
   const page = searchParams["page"] ?? "1";
-  const per_page = searchParams["per_page"] ?? "6";
+  const per_page = searchParams["per_page"] ?? "9";
   const titleQuery = searchParams["title"] ?? "";
   const tagsQuery = searchParams["tags"] ?? "";
 
@@ -53,10 +63,72 @@ const page = async ({
           </p>
         )}
         {perPagePosts.map((post, index) => (
-          <div key={post.id}>
+          <div
+            key={post.id}
+            className="w-[400px] bg-custom-pattern bg-10px-10px hover:bg-5px-5px duration-100 hover:bg-top-left opacity-90 rounded-lg"
+          >
             <BlurFade delay={0.1 * index} inView>
               <Link href={`posts/${post.slug}`}>
-                <PostCard post={post} markdown="" />
+                <Card
+                  key={post.id}
+                  className="flex  gap-2 bg-white dark:bg-slate-800 w-[400px]"
+                >
+                  {/* <Image
+                    width={200}
+                    height={200}
+                    src={post.cover}
+                    alt="post cover"
+                    className="p-2 rounded-2xl"
+                  /> */}
+                  <div className="px-6 py-6 w-full">
+                    <div>
+                      <CardTitle>{post.title}</CardTitle>
+                    </div>
+                    <div>
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        {post.tags.map((tag, index) => (
+                          <span
+                            key={index}
+                            className="inline-block text-sm bg-green-100 text-green-900 px-2 py-0.5  rounded-md mr-2 mb-2"
+                          >
+                            {tag.name}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center flex-row-reverse mt-5">
+                      <Button className="ml-auto realtive group relative inline-flex items-center overflow-hidden rounded-md border-2  px-6 py-2 text-base font-medium ">
+                        <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full  opacity-100 transition-all group-hover:top-0 group-hover:h-full"></span>
+                        <span className="ease absolute right-0 flex h-5 w-5 translate-x-full transform items-center justify-start duration-500 group-hover:-translate-x-2">
+                          <svg
+                            className="h-3 w-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M14 5l7 7m0 0l-7 7m7-7H3"
+                            ></path>
+                          </svg>
+                        </span>
+                        <span className="relative text-sm transform duration-700 group-hover:-translate-x-2">
+                          Read more
+                        </span>
+                      </Button>
+                      <span className="text-sm text-gray-500">
+                        {new Date(post.date).toLocaleDateString("en-US", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </span>
+                    </div>
+                  </div>
+                </Card>
               </Link>
             </BlurFade>
           </div>

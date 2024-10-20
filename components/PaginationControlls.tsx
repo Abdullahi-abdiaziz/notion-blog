@@ -14,7 +14,7 @@ const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
   const searchParams = useSearchParams();
 
   const page = searchParams.get("page") ?? "1";
-  const per_page = searchParams.get("per_page") ?? "6";
+  const per_page = searchParams.get("per_page") ?? "9";
   return (
     <div className="flex gap-2 items-center justify-center mt-10 bg-green-50 dark:bg-green-950 px-2 py-1 rounded-md w-fit mx-auto">
       <Link
