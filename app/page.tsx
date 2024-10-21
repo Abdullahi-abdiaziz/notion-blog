@@ -7,6 +7,7 @@ import PostCard from "@/components/PostCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import Pattern from "@/components/Pattern";
 
 // Generate dynamic metadata
 export async function generateMetadata() {
@@ -54,18 +55,24 @@ export default async function Page() {
   return (
     <main className="min-h-screen my-10">
       <BlurFade delay={0.25} inView>
-        <section className="mb-8 my-20 p-4 container flex justify-center items-center flex-col min-h-[50vh] mx-auto text-center">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">
-            Welcome to Our Kawtech Blog
-          </h1>
-          <p className="text-base md:text-xl">
-            Stay updated with the latest in web development and technology
-          </p>
-          <div className="space-x-4 space-y-8">
-            <Button>Latest Posts</Button>
-            <Button variant="outline">Subscribe</Button>
-          </div>
-        </section>
+        <Pattern>
+          <section className="mb-8 my-20 p-4 min-h-[50vh]  container flex justify-center items-center flex-col mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-2">
+              Welcome to Our Kawtech Blog
+            </h1>
+            <p className="text-xl md:text-2xl">
+              Stay updated with the latest in web development and technology
+            </p>
+            <div className="space-x-4 space-y-8">
+              <Button>
+                <Link href={"/posts"}>Latest Posts</Link>
+              </Button>
+              <Button variant="outline">
+                <Link href={"#subscribe"}>Subscribe</Link>
+              </Button>
+            </div>
+          </section>
+        </Pattern>
       </BlurFade>
 
       <section className="bg-slate-100 dark:bg-slate-800 py-10 rounded-md flex flex-col justify-start mx-auto w-full max-w-screen-2xl">
@@ -90,8 +97,7 @@ export default async function Page() {
           )}
         </div>
       </section>
-
-      <section className="w-full py-12 md:py-24 lg:py-32">
+      <section className="w-full py-12 md:py-24 lg:py-32" id="subscribe">
         <div className="flex justify-between items-center border-2 rounded-md  p-10 px-4 max-w-screen-xl mx-2 sm:mx-auto ">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="space-y-8">
@@ -117,14 +123,16 @@ export default async function Page() {
               </form>
             </div>
           </div>
-          <div className="hidden md:block">
-            <Image
-              src="/subscribe.png"
-              width={400}
-              height={400}
-              alt="Picture of the author"
-            />
-          </div>
+          <Pattern>
+            <div className="hidden md:block">
+              <Image
+                src="/subscribe.png"
+                width={400}
+                height={400}
+                alt="Picture of the author"
+              />
+            </div>
+          </Pattern>
         </div>
       </section>
     </main>

@@ -19,7 +19,8 @@ const MenuToggle = () => {
             <Link
               href={"/"}
               className={`${
-                pathname === "/" && "font-bold underline underline-offset-2"
+                pathname === "/" &&
+                "font-bold px-1 py-0.5 rounded-sm bg-yellow-200 dark:text-slate-800"
               } hover:text-slate-700`}
               onClick={() => setIsOpen(false)}
             >
@@ -28,7 +29,8 @@ const MenuToggle = () => {
             <Link
               href={"/posts"}
               className={`${
-                pathname === "/posts" && "font-bold bg-green-100"
+                pathname === "/posts" &&
+                "font-bold px-1 py-0.5 rounded-sm bg-yellow-200 dark:text-slate-800"
               } hover:text-slate-700`}
               onClick={() => setIsOpen(false)}
             >
@@ -38,7 +40,7 @@ const MenuToggle = () => {
               href={"/contact"}
               className={`${
                 pathname === "/contact" &&
-                "font-bold underline underline-offset-2"
+                "font-bold px-1 py-0.5 rounded-sm bg-yellow-200 dark:text-slate-800"
               } hover:text-slate-700`}
               onClick={() => setIsOpen(false)}
             >

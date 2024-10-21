@@ -65,31 +65,26 @@ const page = async ({
         {perPagePosts.map((post, index) => (
           <div
             key={post.id}
-            className="w-[400px] bg-custom-pattern bg-10px-10px hover:bg-5px-5px duration-100 hover:bg-top-left opacity-90 rounded-lg"
+            className="w-[360px] bg-custom-pattern bg-10px-10px hover:bg-0px-0px hover:scale-[1.05] duration-100 hover:bg-top-left opacity-90 rounded-lg"
           >
             <BlurFade delay={0.1 * index} inView>
               <Link href={`posts/${post.slug}`}>
                 <Card
                   key={post.id}
-                  className="flex  gap-2 bg-white dark:bg-slate-800 w-[400px]"
+                  className="flex justify-between  gap-2 bg-white dark:bg-slate-800 w-full h-[200px]"
                 >
-                  {/* <Image
-                    width={200}
-                    height={200}
-                    src={post.cover}
-                    alt="post cover"
-                    className="p-2 rounded-2xl"
-                  /> */}
                   <div className="px-6 py-6 w-full">
                     <div>
-                      <CardTitle>{post.title}</CardTitle>
+                      <CardTitle className="text-[16px] md:text-md">
+                        {post.title}
+                      </CardTitle>
                     </div>
                     <div>
                       <div className="flex flex-wrap gap-2 mt-4">
                         {post.tags.map((tag, index) => (
                           <span
                             key={index}
-                            className="inline-block text-sm bg-green-100 text-green-900 px-2 py-0.5  rounded-md mr-2 mb-2"
+                            className="inline-block text-xs md:text-sm bg-green-100 text-green-900 px-2 py-0.5  rounded-md mr-2 mb-2"
                           >
                             {tag.name}
                           </span>
@@ -119,7 +114,7 @@ const page = async ({
                           Read more
                         </span>
                       </Button>
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-gray-800 dark:text-gray-200">
                         {new Date(post.date).toLocaleDateString("en-US", {
                           day: "numeric",
                           month: "long",

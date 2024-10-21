@@ -37,8 +37,8 @@ const Header = () => {
 
   return (
     <header
-      className={`py-3 px-4 mx-0 sticky bg-gray-200 z-10 top-0 rounded-sm transition-all duration-300${
-        isVisible ? " dark:bg-gray-800 " : "transform -translate-y-full"
+      className={`py-2 px-3 mx-0.5 top-0.5 shadow-lg border-2 rounded-md sticky bg-white z-10  transition-all duration-300${
+        isVisible ? " dark:bg-black " : "transform -translate-y-full"
       }`}
     >
       <div className="md:max-w-6xl lg:max-w-[100rem] mx-auto px-1">
@@ -50,8 +50,8 @@ const Header = () => {
                 href={"/"}
                 className={`${
                   pathname === "/" &&
-                  "font-bold bg-yellow-200  px-1 py-0.5 rounded-sm dark:text-slate-800"
-                } hover:text-slate-700 dark:hover:text-slate-600`}
+                  "font-bold bg-yellow-200  px-1 py-0.5 rounded-sm dark:text-slate-800 hover:text-slate-600 dark:hover:text-slate-700"
+                } hover:text-slate-700 dark:hover:text-slate-200`}
               >
                 Home
               </Link>
@@ -59,8 +59,8 @@ const Header = () => {
                 href={"/posts"}
                 className={`${
                   pathname === "/posts" &&
-                  "font-bold bg-yellow-200  px-1 py-0.5 rounded-sm dark:text-slate-800"
-                } hover:text-slate-700 dark:hover:text-slate-600 `}
+                  "font-bold bg-yellow-200  px-1 py-0.5 rounded-sm dark:text-slate-800 hover:text-slate-600 dark:hover:text-slate-700"
+                } hover:text-slate-700 dark:hover:text-slate-200 `}
               >
                 Posts
               </Link>
@@ -68,15 +68,15 @@ const Header = () => {
                 href={"/contact"}
                 className={`${
                   pathname === "/contact" &&
-                  "font-bold bg-yellow-200  px-1 py-0.5 rounded-sm dark:text-slate-800"
-                } hover:text-slate-700 dark:hover:text-slate-600`}
+                  "font-bold bg-yellow-200  px-1 py-0.5 rounded-sm dark:text-slate-800 hover:text-slate-600 dark:hover:text-slate-700"
+                } hover:text-slate-600 dark:hover:text-slate-200`}
               >
                 Contact
               </Link>
             </nav>
             <MenuToggle />
             <button
-              className="rounded-md bg-gray-300 dark:bg-gray-700 px-2 py-2 text-sm font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-300"
+              className="rounded-md bg-gray-200 dark:bg-gray-800 px-2 py-2 text-sm font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-300"
               aria-label="Toggle theme"
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             >
