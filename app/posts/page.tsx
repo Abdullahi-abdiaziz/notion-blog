@@ -27,26 +27,38 @@ const page = async ({
     next: { revalidate: 5 },
   });
 
-  const page = searchParams["page"] ?? "1";
-  const per_page = searchParams["per_page"] ?? "9";
-  const titleQuery = searchParams["title"] ?? "";
-  const tagsQuery = searchParams["tags"] ?? "";
+  // Destructure searchParams and set default values
+  const {
+    page = "1",
+    per_page = "9",
+    query: titleQuery = "",
+    tags: tagsQuery = [],
+  } = searchParams;
 
-  // mocked, skipped and limited in the real app
-  const start = (Number(page) - 1) * Number(per_page); // 0, 5, 10 ...
-  const end = start + Number(per_page); // 5, 10, 15 ..
+  const start = (parseInt(page as string) - 1) * parseInt(per_page as string); // 0, 5, 10 ...
+  const end = start + parseInt(per_page as string); // 5, 10, 15 ...
+
+  const tagsArray: string[] = Array.isArray(tagsQuery)
+    ? tagsQuery
+    : [tagsQuery];
 
   let filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(titleQuery.toString().toLowerCase())
+    post.title.toLowerCase().includes(String(titleQuery).trim().toLowerCase())
   );
 
-  let perPagePosts = filteredPosts.slice(start, end);
+  if (tagsArray.length > 0) {
+    filteredPosts = filteredPosts.filter((post) =>
+      tagsArray.every((tagQuery) =>
+        post.tags.some((tag) =>
+          tag.name.toLowerCase().includes(tagQuery.toLowerCase())
+        )
+      )
+    );
+  }
 
-  // filteredPosts = filteredPosts.filter((post) =>
-  //   post.tags.some((tag) =>
-  //     tag.name.toLowerCase().includes(tagsQuery.toString().toLowerCase())
-  //   )
-  // );
+  const paginatedPosts = filteredPosts.slice(start, end);
+
+  let perPagePosts = filteredPosts.slice(start, end);
 
   return (
     <section className="min-h-screen max-w-screen-2xl mx-auto my-16 px-5">
