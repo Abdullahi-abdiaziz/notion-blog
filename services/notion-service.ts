@@ -36,6 +36,35 @@ export default class NotionService {
     });
   }
 
+  async getFeaturedPosts(_p0?: { next: { revalidate: number } }) {
+    // Fetch featured posts from your Notion database
+    const response = await this.client.databases.query({
+      database_id: this.database,
+      filter: {
+        and: [
+          {
+            property: "Featured",
+            checkbox: {
+              equals: true, // Use `checkbox` for boolean properties
+            },
+          },
+          {
+            property: "Status",
+            status: {
+              equals: "Published",
+            },
+          },
+        ],
+      },
+      sorts: [{ property: "Date", direction: "descending" }],
+    });
+
+    // Transform each page result
+    return response.results.map((res) => {
+      return NotionService.page2PostTransformer(res);
+    });
+  }
+
   async getPostBySlug(
     slug: string,
     p0?: { next: { revalidate: number } }

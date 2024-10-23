@@ -46,7 +46,7 @@ export async function generateMetadata() {
 
 export default async function Page() {
   const notionServices = new NotionService();
-  const posts: BlogPost[] = await notionServices.getBlogPosts({
+  const posts: BlogPost[] = await notionServices.getFeaturedPosts({
     next: { revalidate: 5 },
   });
 

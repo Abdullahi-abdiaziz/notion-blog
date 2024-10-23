@@ -17,7 +17,7 @@ import { Badge } from "./ui/badge";
 import { DropdownMenuIcon } from "@radix-ui/react-icons";
 
 function SearchForm() {
-  const [showTags, setShowTags] = useState(false);
+  const [showTags, setShowTags] = useState(true);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -96,8 +96,8 @@ function SearchForm() {
                 key={tag}
                 className={`${
                   isActive
-                    ? "bg-green-200 text-green-800 dark:bg-green-200 dark:text-green-800 hover:bg-green-50"
-                    : "bg-slate-200 text-green-800 dark:bg-slate-700 dark:text-green-50 hover:bg-slate-100"
+                    ? "bg-green-100 text-slate-800 dark:bg-green-100 dark:text-slate-800 hover:bg-green-200"
+                    : "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-green-50 hover:bg-slate-100"
                 } px-2 py-1 text-sm rounded-md shadow-sm mr-2 cursor-pointer mb-2`}
                 onClick={() => handleTagClick(tag)}
               >

@@ -50,7 +50,6 @@ export default function ContactPage() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    // In a real application, you would send this data to your server
     console.log(values);
     setTimeout(() => {
       setIsSubmitting(false);
@@ -71,7 +70,7 @@ export default function ContactPage() {
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-8"
+                  className="space-y-8 bg-slate-100 dark:bg-slate-800 p-4 md:px-6 rounded-lg"
                 >
                   <FormField
                     control={form.control}
@@ -120,7 +119,7 @@ export default function ContactPage() {
                       <FormItem>
                         <FormLabel>Subject</FormLabel>
                         <FormControl>
-                          <div className="relative">
+                          <div className="relative ">
                             <MessageSquare className="absolute left-2 top-2.5 h-4 w-4 text-gray-500" />
                             <Input
                               placeholder="Message subject"
