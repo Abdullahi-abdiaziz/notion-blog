@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Pattern from "@/components/Pattern";
+import { BackgroundLines } from "@/components/ui/BackgroundLines";
+import { Cover } from "@/components/ui/cover";
 
 // Generate dynamic metadata
 export async function generateMetadata() {
@@ -53,26 +55,31 @@ export default async function Page() {
   const recentPosts = posts.slice(0, 6);
 
   return (
-    <main className="min-h-screen my-10">
+    <main className="min-h-screen">
       <BlurFade delay={0.25} inView>
-        <Pattern>
-          <section className="mb-8 my-20 p-4 min-h-[50vh]  container flex justify-center items-center flex-col mx-auto text-center">
+        {/* <Pattern> */}
+        <BackgroundLines className=" flex items-center justify-center w-full flex-col px-4">
+          <section className="mb-8 my-20 p-4   container flex justify-center items-center flex-col mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-2">
-              Welcome to Our Kawtech Blog
+              Welcome to Our
+              <Cover>Kawtech Blog</Cover>
             </h1>
             <p className="text-xl md:text-2xl">
               Stay updated with the latest in web development and technology
             </p>
-            <div className="space-x-4 space-y-8">
+            <div className="space-x-4 space-y-8 relative">
               <Button>
-                <Link href={"/posts"}>Latest Posts</Link>
+                <Link href={"/posts"} className="z-50">
+                  Latest Posts
+                </Link>
               </Button>
               <Button variant="outline">
                 <Link href={"#subscribe"}>Subscribe</Link>
               </Button>
             </div>
           </section>
-        </Pattern>
+        </BackgroundLines>
+        {/* </Pattern> */}
       </BlurFade>
 
       <section className="bg-slate-100 dark:bg-slate-800 py-10 rounded-md flex flex-col justify-start mx-auto w-full max-w-screen-2xl">

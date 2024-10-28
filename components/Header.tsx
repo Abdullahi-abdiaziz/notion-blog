@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <header
-      className={`py-2 px-3 mx-0.5 top-0.5 shadow-lg border-2 rounded-md sticky bg-white z-10  transition-all duration-300${
+      className={`py-1 px-3 mx-0.5 top-0.5 shadow-lg border-2 rounded-md sticky bg-white z-10  transition-all duration-300${
         isVisible ? " dark:bg-black " : "transform -translate-y-full"
       }`}
     >
