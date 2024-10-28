@@ -77,13 +77,13 @@ const page = async ({
         {perPagePosts.map((post, index) => (
           <div
             key={post.id}
-            className="w-[360px] bg-custom-pattern bg-10px-10px hover:bg-0px-0px hover:scale-[1.05] duration-100 hover:bg-top-left opacity-90 rounded-lg"
+            className="w-[360px] bg-custom-pattern bg-10px-10px hover:bg-0px-0px hover:scale-[1.05] duration-100 hover:bg-top-left opacity-90 rounded-md mt-10"
           >
             <BlurFade delay={0.1 * index} inView>
               <Link href={`posts/${post.slug}`}>
                 <Card
                   key={post.id}
-                  className="flex justify-between  gap-2 bg-white dark:bg-slate-800 w-full h-[200px]"
+                  className="flex justify-between  gap-2 bg-gradient-to-tl from-slate-50 via-slate-100 to-slate-200 dark:bg-gradient-to-tl hover:dark:bg-gradient-to-br hover:bg-gradient-to-br duration-100 hover:animate-in w-full dark:from-slate-700 dark:via-slate-800 dark:to-slate-900 h-[200px] rounded shadow-xl"
                 >
                   <div className="px-6 py-6 w-full">
                     <div>

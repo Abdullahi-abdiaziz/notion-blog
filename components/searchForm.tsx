@@ -1,21 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "./ui/button";
 import {
-    ArrowBigDown,
-    rrowDown01Icon,
-  ArrowDownFromLine,
   ArrowDownLeftFromSquareIcon,
-  
-  ArrowDownNarrowWideIcon,
   PlusCircle,
-  Search,
   Verified,
 } from "lucide-react";
 import { Input } from "./ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "./ui/badge";
-import { DropdownMenuIcon } from "@radix-ui/react-icons";
 
 function SearchForm() {
   const [showTags, setShowTags] = useState(true);
@@ -51,22 +43,18 @@ function SearchForm() {
     "aws-lambda",
   ];
 
-  // Handle tag selection/deselection
   const handleTagClick = (tag: string) => {
     const params = new URLSearchParams(searchParams);
     const currentTags = params.getAll("tags");
 
     if (currentTags.includes(tag)) {
-      // Remove tag if it is already selected
       const newTags = currentTags.filter((t) => t !== tag);
       params.delete("tags"); // Clear all tags first
       newTags.forEach((t) => params.append("tags", t)); // Re-add filtered tags
     } else {
-      // Add tag if it's not selected
       params.append("tags", tag);
     }
 
-    // Update the URL with new search params
     router.replace(`${pathname}?${params.toString()}`);
   };
 
