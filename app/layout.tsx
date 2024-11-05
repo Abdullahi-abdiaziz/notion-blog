@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import { ThemeProvider } from "@/contexts/theme";
 import { Raleway } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
+import GridBackground from "@/components/ui/GridBackground";
 
 const raleway = Raleway({ subsets: ["latin"], weight: ["300", "500"] });
 
@@ -25,10 +26,12 @@ export default function RootLayout({
           <div
             className={`${raleway.className} font-sans bg-slate-50 dark:bg-slate-900`}
           >
-            <Header />
-            {children}
-            <Toaster />
-            <Footer />
+            <GridBackground>
+              <Header />
+              {children}
+              <Toaster />
+              <Footer />
+            </GridBackground>
           </div>
         </body>
       </html>

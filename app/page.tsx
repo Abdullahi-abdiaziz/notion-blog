@@ -10,6 +10,7 @@ import Image from "next/image";
 import Pattern from "@/components/Pattern";
 import { BackgroundLines } from "@/components/ui/BackgroundLines";
 import { Cover } from "@/components/ui/cover";
+import GridBackground from "@/components/ui/GridBackground";
 
 // Generate dynamic metadata
 export async function generateMetadata() {
@@ -58,27 +59,24 @@ export default async function Page() {
     <main className="min-h-screen">
       <BlurFade delay={0.25} inView>
         {/* <Pattern> */}
-        <BackgroundLines className=" flex items-center justify-center w-full flex-col px-4">
-          <section className="mb-8 my-20 p-4   container flex justify-center items-center flex-col mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-2">
-              Welcome to Our
-              <Cover>Kawtech Blog</Cover>
-            </h1>
-            <p className="text-xl md:text-2xl">
-              Stay updated with the latest in web development and technology
-            </p>
-            <div className="space-x-4 space-y-8 relative">
-              <Button>
-                <Link href={"/posts"} className="z-50">
-                  Latest Posts
-                </Link>
-              </Button>
-              <Button variant="outline">
-                <Link href={"#subscribe"}>Subscribe</Link>
-              </Button>
-            </div>
-          </section>
-        </BackgroundLines>
+        <section className="mb-8 my-20 p-4 min-h-[50vh]  container flex justify-center items-center flex-col mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-2">
+            Welcome to Our <Cover>Kawtech Blog</Cover>
+          </h1>
+          <p className="text-xl md:text-2xl">
+            Stay updated with the latest in web development and technology
+          </p>
+          <div className="space-x-4 space-y-8 relative">
+            <Button>
+              <Link href={"/posts"} className="z-50">
+                Latest Posts
+              </Link>
+            </Button>
+            <Button variant="outline">
+              <Link href={"#subscribe"}>Subscribe</Link>
+            </Button>
+          </div>
+        </section>
         {/* </Pattern> */}
       </BlurFade>
 

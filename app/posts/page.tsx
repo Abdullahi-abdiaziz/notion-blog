@@ -3,17 +3,9 @@ import PostCard from "@/components/PostCard";
 import SearchForm from "@/components/searchForm";
 import BlurFade from "@/components/ui/blur-fade";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardTitle } from "@/components/ui/card";
 import NotionService from "@/services/notion-service";
 import { BlogPost } from "@/types/schema";
-import { Badge, MoveRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -61,7 +53,7 @@ const page = async ({
   let perPagePosts = filteredPosts.slice(start, end);
 
   return (
-    <section className="min-h-screen max-w-screen-2xl mx-auto my-16 px-5">
+    <section className="min-h-screen max-w-screen-2xl mx-auto my-16 px-5 relative">
       <BlurFade delay={0.25} inView>
         <h1 className="text-3xl md:text-4xl font-bold mb-5 ">
           Latest Blog Posts
