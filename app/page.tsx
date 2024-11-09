@@ -1,16 +1,13 @@
 import NotionService from "@/services/notion-service";
 import { BlogPost } from "@/types/schema";
 import Link from "next/link";
-import { FileSignatureIcon, Forward, LucideNewspaper } from "lucide-react";
+import { FileSignatureIcon, LucideNewspaper } from "lucide-react";
 import BlurFade from "@/components/ui/blur-fade";
 import PostCard from "@/components/PostCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Pattern from "@/components/Pattern";
-import { BackgroundLines } from "@/components/ui/BackgroundLines";
-import { Cover } from "@/components/ui/cover";
-import GridBackground from "@/components/ui/GridBackground";
 
 // Generate dynamic metadata
 export async function generateMetadata() {
@@ -61,7 +58,7 @@ export default async function Page() {
         {/* <Pattern> */}
         <section className="mb-8 my-20 p-4 min-h-[50vh]  container flex justify-center items-center flex-col mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-2">
-            Welcome to Our <Cover>Kawtech Blog</Cover>
+            Welcome to Our Kawtech Blog
           </h1>
           <p className="text-xl md:text-2xl">
             Stay updated with the latest in web development and technology
