@@ -3,15 +3,16 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { ThemeProvider } from "@/contexts/theme";
-import { Raleway } from "next/font/google";
+import { Work_Sans } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import GridBackground from "@/components/ui/GridBackground";
 
-const raleway = Raleway({ subsets: ["latin"], weight: ["300", "500"] });
+const worksans = Work_Sans({ subsets: ["latin"], weight: ["300", "500"] });
 
 export const metadata: Metadata = {
   title: "Notion Blog",
-  description: "a Blog site that is controlled by notion, ",
+  description:
+    "a Blog site that is controlled by notion as content management system, ",
 };
 
 export default function RootLayout({
@@ -24,7 +25,7 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <div
-            className={`${raleway.className} font-sans bg-slate-50 dark:bg-slate-900`}
+            className={`${worksans.className} font-sans bg-slate-50 dark:bg-slate-900`}
           >
             <GridBackground>
               <Header />

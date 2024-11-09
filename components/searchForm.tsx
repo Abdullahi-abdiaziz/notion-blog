@@ -2,12 +2,16 @@
 import React, { useState } from "react";
 import {
   ArrowDownLeftFromSquareIcon,
+  LucideVerified,
   PlusCircle,
+  PlusIcon,
+  TicketIcon,
   Verified,
 } from "lucide-react";
 import { Input } from "./ui/input";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "./ui/badge";
+import { PlusCircledIcon } from "@radix-ui/react-icons";
 
 function SearchForm() {
   const [showTags, setShowTags] = useState(true);
@@ -36,11 +40,7 @@ function SearchForm() {
     "typescript",
     "javascript",
     "mongodb",
-    "graphql",
-    "aws",
-    "docker",
-    "kubernetes",
-    "aws-lambda",
+    "authentication",
   ];
 
   const handleTagClick = (tag: string) => {
@@ -87,16 +87,16 @@ function SearchForm() {
                   isActive
                     ? "bg-green-100 text-slate-800 dark:bg-green-100 dark:text-slate-800 hover:bg-green-200"
                     : "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-green-50 hover:bg-slate-100"
-                } px-2 py-1 text-sm rounded-md shadow-sm mr-2 cursor-pointer mb-2`}
+                } px-2 py-1 text-base rounded-md shadow-sm mr-2 cursor-pointer mb-2`}
                 onClick={() => handleTagClick(tag)}
               >
                 {isActive ? (
-                  <Verified
+                  <LucideVerified
                     size={15}
                     className="mr-1 text-green-800 font-extrabold"
                   />
                 ) : (
-                  <PlusCircle size={14} className="mr-1" />
+                  <PlusIcon size={14} className="mr-1" />
                 )}
                 {tag}
               </Badge>
