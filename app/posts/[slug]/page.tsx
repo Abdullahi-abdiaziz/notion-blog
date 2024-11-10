@@ -95,12 +95,11 @@ const PostPage = async ({ params }: PostPageProps) => {
             {post?.post.title}
           </h1>
           <Image
-            className="rounded-xl my-10 px-2"
+            className="rounded-xl my-10 px-2 sm:px-0 shadow-lg sm:mx-auto border-2"
             src={post?.post.cover}
             alt={post?.post.title}
-            width={500}
+            width={900}
             height={100}
-            layout="responsive"
             style={{ objectFit: "cover" }}
             priority={true}
           />

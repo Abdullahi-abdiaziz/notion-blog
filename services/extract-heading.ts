@@ -6,8 +6,13 @@ export const extractHeadings = (markdown: string) => {
     const level = heading.indexOf(" ") - 1;
     const text = heading.replace(/^#+\s/, "").trim();
 
-    const lower = text.replace(/[^\w]+/g, "-").toLowerCase();
-    const id = lower.replace(/^-+|-+$/g, "");
+    const id = text
+      .replace(/[^\w\s/.]+/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/[/.]+/g, "-")
+      .replace(/(^-+|-+$)/g, "")
+      .replace(/--+/g, "-")
+      .toLowerCase();
 
     return { level, text, id };
   });
