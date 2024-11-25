@@ -1,20 +1,8 @@
 "use client";
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import {
-  BiRightArrow,
-  BiRightArrowAlt,
-  BiSolidLeftArrow,
-  BiSolidLeftArrowSquare,
-  BiSolidRightArrow,
-  BiSolidRightArrowAlt,
-} from "react-icons/bi";
 import Link from "next/link";
-import {
-  ArrowLeftSquare,
-  ArrowRightFromLine,
-  ArrowRightSquare,
-} from "lucide-react";
+import { ArrowLeftSquare, ArrowRightSquare } from "lucide-react";
 
 type PaginationProps = {
   hasNextPage: boolean;
@@ -32,9 +20,9 @@ const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
       <Link
         className={`${
           !hasPrevPage
-            ? "text-blue-300 dark:text-blue-300"
-            : "text-blue-600 dark:text-blue-600"
-        } flex justify-center items-center"`}
+            ? "text-blue-300 dark:text-blue-300 bg-slate-100 dark:bg-slate-900 "
+            : "text-blue-600 dark:text-blue-600 bg-white dark:bg-black"
+        } flex justify-center items-center border rounded"`}
         href={`${
           hasPrevPage
             ? `posts/?page=${Number(page) - 1}&per_page=${per_page}`
@@ -49,14 +37,14 @@ const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
       </Link>
 
       <div className="text-black dark:text-white flex gap-1">
-        <span className="font-bold  w-8 text-center  rounded-sm bg-white dark:bg-slate-900 shadow-lg border">
+        <span className="font-bold  w-8 text-center flex items-center justify-center  rounded-sm bg-white dark:bg-slate-950 shadow-lg">
           {hasPrevPage && Number(page) - 1}
         </span>
 
         <span className="font-bold px-3 py-0.5 rounded-sm shadow-lg bg-yellow-200 text-yellow-900 border scale-110 ml-2 mr-2">
           {page}
         </span>
-        <span className="font-bold w-8 text-center border py-0.5 rounded-sm bg-white dark:bg-slate-900 shadow-lg">
+        <span className="font-bold w-8 text-center flex justify-center items-center  rounded-sm bg-white dark:bg-slate-950 shadow-lg">
           {hasNextPage && Number(page) + 1}
         </span>
       </div>
@@ -64,9 +52,9 @@ const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
       <Link
         className={`${
           !hasNextPage
-            ? "text-blue-300 dark:text-blue-300"
-            : "text-blue-600 dark:text-blue-600"
-        }  flex items-center justify-center"`}
+            ? "text-blue-300 dark:text-blue-300 bg-slate-100 dark:bg-slate-900 "
+            : "text-blue-600 dark:text-blue-600 bg-white dark:bg-black"
+        }  flex items-center justify-center border rounded"`}
         href={`${
           hasNextPage
             ? `posts/?page=${Number(page) + 1}&per_page=${per_page}`

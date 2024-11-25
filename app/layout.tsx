@@ -2,12 +2,16 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import localFont from "next/font/local";
 import { ThemeProvider } from "@/contexts/theme";
-import { Work_Sans } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
 import GridBackground from "@/components/ui/GridBackground";
 
-const worksans = Work_Sans({ subsets: ["latin"], weight: ["300", "500"] });
+const geistMono = localFont({
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geistMono", // Optional CSS variable
+  display: "swap", // Recommended for better performance
+});
 
 export const metadata: Metadata = {
   title: "Notion Blog",
@@ -25,7 +29,7 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <div
-            className={`${worksans.className} font-sans bg-slate-50 dark:bg-slate-900`}
+            className={`${geistMono.className} font-sans bg-slate-50 dark:bg-slate-900`}
           >
             <GridBackground>
               <Header />
