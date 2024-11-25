@@ -18,19 +18,21 @@ const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
   return (
     <div className="flex gap-2 items-center justify-center mt-10  px-2 py-1 rounded-md w-fit mx-auto">
       <Link
-        className={`${
-          !hasPrevPage
-            ? "text-blue-300 dark:text-blue-300 bg-slate-100 dark:bg-slate-900 "
-            : "text-blue-600 dark:text-blue-600 bg-white dark:bg-black"
-        } flex justify-center items-center border rounded"`}
+        className={` flex justify-center items-center"`}
         href={`${
           hasPrevPage
-            ? `posts/?page=${Number(page) - 1}&per_page=${per_page}`
-            : `posts/?page=${Number(page)}&per_page=${per_page}`
+            ? `posts?page=${Number(page) - 1}&per_page=${per_page}`
+            : `posts?page=${Number(page)}&per_page=${per_page}`
         }`}
         {...(hasPrevPage ? {} : { disabled: true })}
       >
-        <div className="px-2 py-1 rounded-md  flex gap-1 items-center">
+        <div
+          className={`px-2 py-1 rounded-md border flex gap-1 items-center ${
+            !hasPrevPage
+              ? "text-gray-600 dark:text-gray-400 bg-slate-100 dark:bg-slate-800 "
+              : "text-blue-600 dark:text-blue-600 bg-white dark:bg-black"
+          }`}
+        >
           <ArrowLeftSquare size={16} />
           <p>Previous</p>
         </div>
@@ -50,19 +52,21 @@ const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
       </div>
 
       <Link
-        className={`${
-          !hasNextPage
-            ? "text-blue-300 dark:text-blue-300 bg-slate-100 dark:bg-slate-900 "
-            : "text-blue-600 dark:text-blue-600 bg-white dark:bg-black"
-        }  flex items-center justify-center border rounded"`}
+        className={`  flex items-center justify-center rounded-md"`}
         href={`${
           hasNextPage
-            ? `posts/?page=${Number(page) + 1}&per_page=${per_page}`
-            : `posts/?page=${Number(page)}&per_page=${per_page}`
+            ? `posts?page=${Number(page) + 1}&per_page=${per_page}`
+            : `posts?page=${Number(page)}&per_page=${per_page}`
         }`}
         {...(hasNextPage ? {} : { disabled: true })}
       >
-        <div className="px-2 py-1 rounded-md flex gap-1 items-center">
+        <div
+          className={`px-2 py-1 rounded-md border flex gap-1 items-center ${
+            !hasNextPage
+              ? "text-gray-600 dark:text-gray-400 bg-slate-100 dark:bg-slate-800 "
+              : "text-blue-600 dark:text-blue-600 bg-white dark:bg-black"
+          }`}
+        >
           <p>Next</p>
           <ArrowRightSquare size={16} />
         </div>
