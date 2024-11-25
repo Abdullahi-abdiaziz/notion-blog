@@ -10,11 +10,10 @@ type PaginationProps = {
 };
 
 const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
-  const router = useRouter();
   const searchParams = useSearchParams();
 
   const page = searchParams.get("page") ?? "1";
-  const per_page = searchParams.get("per_page") ?? "9";
+  const per_page = searchParams.get("per_page") ?? "6";
   return (
     <div className="flex gap-2 items-center justify-center mt-10  px-2 py-1 rounded-md w-fit mx-auto">
       <Link

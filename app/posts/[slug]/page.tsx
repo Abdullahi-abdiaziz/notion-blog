@@ -125,7 +125,7 @@ const PostPage = async ({ params }: PostPageProps) => {
         </BlurFade>
 
         <BlurFade delay={0.75} inView>
-          <article className="prose prose-pre:bg-transparent prose-blockquote:bg-green-50 prose-blockquote:px-4 prose-blockquote:py-0.5 prose-blockquote:rounded-sm prose-blockquote:dark:bg-green-950 prose-blockquote:dark:text-white prose-blockquote:border-l-2 prose-blockquote:border-lime-400  text-sm md:text-base lg:text-lg mx-auto max-w-5xl mt-10 px-5 text-gray-700 dark:text-gray-300">
+          <article className="prose prose-pre:bg-transparent prose-blockquote:bg-green-50 prose-blockquote:px-4 prose-blockquote:py-0.5 prose-blockquote:rounded-sm prose-blockquote:dark:bg-green-950 prose-blockquote:dark:text-white prose-blockquote:border-l-2 prose-blockquote:border-lime-400  text-sm md:text-base lg:text-lg mx-auto max-w-5xl mt-10 px-3 sm:px-5 text-gray-700 dark:text-gray-300">
             <Markdown
               remarkPlugins={[remarkGfm]}
               components={{
@@ -176,7 +176,7 @@ const PostPage = async ({ params }: PostPageProps) => {
                     />
                   ) : (
                     <code
-                      className={`bg-gray-400 dark:bg-gray-300 text-gray-900 dark:text-gray-800 px-2 font-mono font-bold text-xs  py-0.5 rounded-sm`}
+                      className={`bg-gray-400 dark:bg-gray-300 text-gray-900 dark:text-gray-800  font-mono font-bold text-xs m-0  rounded-sm`}
                       {...props}
                     >
                       {children}

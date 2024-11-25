@@ -22,7 +22,7 @@ const page = async ({
   // Destructure searchParams and set default values
   const {
     page = "1",
-    per_page = "9",
+    per_page = "6",
     query: titleQuery = "",
     tags: tagsQuery = [],
   } = searchParams;
@@ -60,6 +60,7 @@ const page = async ({
         </h1>
       </BlurFade>
       <SearchForm />
+
       <div className="flex flex-wrap items-center gap-10">
         {perPagePosts.length === 0 && (
           <p className="text-gray-700 dark:text-gray-400 text-center text-xl font-extrabold">
