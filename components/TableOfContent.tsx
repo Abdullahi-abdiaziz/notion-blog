@@ -1,6 +1,6 @@
 "use client"; // For using browser features
 
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { usePathname } from "next/navigation"; // For handling route changes
 import { extractHeadings } from "@/services/extract-heading";
 
@@ -107,4 +107,4 @@ const TableOfContents: React.FC<{ markdown: string }> = ({ markdown }) => {
   );
 };
 
-export default TableOfContents;
+export default memo(TableOfContents);
