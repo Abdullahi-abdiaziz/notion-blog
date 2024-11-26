@@ -54,7 +54,7 @@ export default async function Page() {
 
   return (
     <main className="min-h-screen">
-      <BlurFade delay={0.25} inView>
+      <BlurFade delay={0.1} inView>
         {/* <Pattern> */}
         <section className="mb-8 my-20 p-4 min-h-[50vh]  container flex justify-center items-center flex-col mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-2">
@@ -63,14 +63,16 @@ export default async function Page() {
           <p className="text-xl md:text-2xl">
             Stay updated with the latest in web development and technology
           </p>
-          <div className="space-x-4 space-y-8 relative">
+          <div className="space-x-6 space-y-10 relative">
             <Button>
-              <Link href={"/posts"} className="z-50">
+              <Link href={"/posts"} className="z-50 text-base p-2">
                 Latest Posts
               </Link>
             </Button>
             <Button variant="outline">
-              <Link href={"#subscribe"}>Subscribe</Link>
+              <Link href={"#subscribe"} className="text-base p-2">
+                Subscribe
+              </Link>
             </Button>
           </div>
         </section>

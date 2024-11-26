@@ -42,7 +42,7 @@ const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
           {hasPrevPage && Number(page) - 1}
         </span>
 
-        <span className="font-bold px-3 py-0.5 rounded-sm shadow-lg bg-yellow-200 text-yellow-900 border scale-110 ml-2 mr-2">
+        <span className="px-3 py-0.5 rounded-sm shadow-lg bg-green-100 text-green-900 font-bold border scale-125 ml-2 mr-2">
           {page}
         </span>
         <span className="font-bold w-8 text-center flex justify-center items-center  rounded-sm bg-white dark:bg-slate-950 shadow-lg">

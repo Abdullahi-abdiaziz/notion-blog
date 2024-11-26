@@ -11,7 +11,10 @@ const MenuToggle = () => {
   return (
     <div>
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetTrigger className="rounded-md bg-gray-300 dark:bg-gray-700 px-2 py-2 text-sm font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-300 md:hidden">
+        <SheetTrigger
+          className="rounded-md bg-gray-300 dark:bg-gray-700 px-2 py-2 text-sm font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-300 md:hidden"
+          aria-label="menu toggle"
+        >
           <MenuIcon size={16} />
         </SheetTrigger>
         <SheetContent side={"top"}>
