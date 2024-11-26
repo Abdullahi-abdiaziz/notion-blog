@@ -63,14 +63,22 @@ export default async function Page() {
           <p className="text-xl md:text-2xl">
             Stay updated with the latest in web development and technology
           </p>
-          <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 relative mt-6">
+          <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 items-center relative mt-6">
             <Button>
-              <Link href="/posts" className="z-50 text-base px-4 py-3 block">
+              <Link
+                href="/posts"
+                className="z-50 text-base px-6 py-4 block"
+                style={{ minWidth: "48px", minHeight: "48px" }}
+              >
                 Latest Posts
               </Link>
             </Button>
             <Button variant="outline">
-              <Link href="#subscribe" className="text-base px-4 py-3 block">
+              <Link
+                href="#subscribe"
+                className="text-base px-6 py-4 block"
+                style={{ minWidth: "48px", minHeight: "48px" }}
+              >
                 Subscribe
               </Link>
             </Button>
