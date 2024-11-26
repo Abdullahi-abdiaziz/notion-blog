@@ -63,14 +63,14 @@ export default async function Page() {
           <p className="text-xl md:text-2xl">
             Stay updated with the latest in web development and technology
           </p>
-          <div className="space-x-6 space-y-10 relative">
+          <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 relative mt-6">
             <Button>
-              <Link href={"/posts"} className="z-50 text-base p-2">
+              <Link href="/posts" className="z-50 text-base px-4 py-3 block">
                 Latest Posts
               </Link>
             </Button>
             <Button variant="outline">
-              <Link href={"#subscribe"} className="text-base p-2">
+              <Link href="#subscribe" className="text-base px-4 py-3 block">
                 Subscribe
               </Link>
             </Button>
