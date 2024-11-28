@@ -1,5 +1,4 @@
 import PaginationControlls from "@/components/PaginationControlls";
-import PostCard from "@/components/PostCard";
 import SearchForm from "@/components/searchForm";
 import BlurFade from "@/components/ui/blur-fade";
 import { Button } from "@/components/ui/button";
@@ -47,8 +46,6 @@ const page = async ({
       )
     );
   }
-
-  const paginatedPosts = filteredPosts.slice(start, end);
 
   let perPagePosts = filteredPosts.slice(start, end);
 

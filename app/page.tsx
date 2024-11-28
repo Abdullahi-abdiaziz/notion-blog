@@ -64,7 +64,7 @@ export default async function Page() {
             Stay updated with the latest in web development and technology
           </p>
           <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 items-center relative mt-6">
-            <Button className="p-4 sm:p-6 border">
+            <Button className="p-6">
               <Link
                 href="/posts"
                 className="text-base block"
@@ -77,7 +77,7 @@ export default async function Page() {
                 Latest Posts
               </Link>
             </Button>
-            <Button variant="outline" className="p-4 sm:p-6">
+            <Button variant="outline" className="p-6">
               <Link
                 href="#subscribe"
                 className="text-base block"

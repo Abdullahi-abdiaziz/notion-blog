@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeftSquare, ArrowRightSquare } from "lucide-react";
 
