@@ -1,42 +1,56 @@
 "use client";
+
 import React, {
   useContext,
   useState,
   createContext,
   ReactNode,
   useEffect,
+  useCallback,
 } from "react";
 
-export const ThemeContext = createContext({
+// Define the shape of the theme context
+interface ThemeContextType {
+  theme: string;
+  setTheme: (theme: string) => void;
+}
+
+// Create the context with a default value
+const ThemeContext = createContext<ThemeContextType>({
   theme: "light",
-  setTheme: (theme: string) => {},
+  setTheme: () => {}, // Default to a no-op function
 });
 
-export const useTheme = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
-  return { theme, setTheme };
-};
+// Hook for consuming the theme context
+export const useTheme = () => useContext(ThemeContext);
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+// ThemeProvider component
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<string>("light");
 
-  // Load the theme from localStorage when the app starts
+  // Load the theme only in the browser
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setTheme(savedTheme);
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      setTheme(storedTheme);
     }
   }, []);
 
+  // Update the body class whenever the theme changes
   useEffect(() => {
-    document.body.className = theme;
+    document.body.classList.remove("light", "dark");
+    document.body.classList.add(theme);
   }, [theme]);
 
-  // Save the theme to localStorage whenever it changes
-  const changeTheme = (newTheme: string) => {
+  // Memoize the theme change handler
+  const changeTheme = useCallback((newTheme: string) => {
     setTheme(newTheme);
-    localStorage.setItem("theme", newTheme); // persist the selected theme
-  };
+    localStorage.setItem("theme", newTheme);
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme: changeTheme }}>

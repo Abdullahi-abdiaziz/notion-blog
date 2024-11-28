@@ -64,20 +64,28 @@ export default async function Page() {
             Stay updated with the latest in web development and technology
           </p>
           <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 items-center relative mt-6">
-            <Button>
+            <Button className="p-4 sm:p-6 border">
               <Link
                 href="/posts"
-                className="z-50 text-base px-6 py-4 block"
-                style={{ minWidth: "48px", minHeight: "48px" }}
+                className="text-base block"
+                style={{
+                  minWidth: "50px", // Ensure a larger minimum width
+                  minHeight: "50px", // Ensure a larger minimum height
+                  padding: "12px 24px", // Add padding to increase the touch area
+                }}
               >
                 Latest Posts
               </Link>
             </Button>
-            <Button variant="outline">
+            <Button variant="outline" className="p-4 sm:p-6">
               <Link
                 href="#subscribe"
-                className="text-base px-6 py-4 block"
-                style={{ minWidth: "48px", minHeight: "48px" }}
+                className="text-base block"
+                style={{
+                  minWidth: "50px", // Ensure a larger minimum width
+                  minHeight: "50px", // Ensure a larger minimum height
+                  padding: "12px 24px", // Add padding to increase the touch area
+                }}
               >
                 Subscribe
               </Link>
