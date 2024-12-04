@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { xonokai } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { xcode } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { BlogPost } from "@/types/schema";
 import type { PostPage } from "@/types/schema";
 import { extractId } from "@/services/extract-id";
@@ -13,6 +13,7 @@ import NotionService from "@/services/notion-service";
 import { extractHeadings } from "@/services/extract-heading";
 import BlurFade from "@/components/ui/blur-fade";
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
+import localFont from "next/font/local";
 
 const TableOfContents = dynamic(
   () => import("../../../components/TableOfContent"),
@@ -24,6 +25,12 @@ const TableOfContents = dynamic(
 interface PostPageProps {
   params: { slug: string };
 }
+
+const geistMono = localFont({
+  src: "../../fonts/GeistMonoVF.woff",
+  variable: "--font-geistMono", // Optional CSS variable
+  display: "swap", // Recommended for better performance
+});
 
 export async function generateMetadata({
   params,
@@ -38,29 +45,37 @@ export async function generateMetadata({
     };
   }
 
+  const { title, description, cover } = post.post;
+  console.log(title, description, cover);
+
   return {
-    title: post.post.title,
-    description: post.post.description,
+    title: title || "Blog Post",
+    description: description || "Read this blog post for more information.",
     openGraph: {
-      title: post.post.title,
-      description: post.post.description,
+      title: title || "Blog Post",
+      description: description || "Read this blog post for more information.",
       type: "article",
-      url: `https://kawtech.vercel.app/posts/${params.slug}`,
+      url: `https://kawtech.vercel.app/post/${params.slug}`,
       siteName: "Kawtech",
-      images: [
-        {
-          url: post.post.cover,
-          width: 1200,
-          height: 630,
-          alt: post.post.title,
-        },
-      ],
+      images: cover
+        ? [
+            {
+              url: cover,
+              width: 1200,
+              height: 630,
+              alt: title || "Blog Post",
+            },
+          ]
+        : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: post.post.title,
-      description: post.post.description,
-      images: post.post.cover,
+      title: title || "Blog Post",
+      description: description || "Read this blog post for more information.",
+      images: cover || undefined,
+    },
+    alternates: {
+      canonical: `https://kawtech.vercel.app/post/${params.slug}`,
     },
   };
 }
@@ -168,9 +183,9 @@ const PostPage = async ({ params }: PostPageProps) => {
                     // @ts-ignore
                     <SyntaxHighlighter
                       children={String(children).replace(/\n$/, "")}
-                      theme={xonokai}
-                      style={xonokai as any}
-                      className={"bg-transparent"}
+                      theme={xcode}
+                      // style={github as any}
+                      className={`${geistMono.className} bg-transparent`}
                       language={match[1]}
                       {...props}
                     />
@@ -209,7 +224,7 @@ const PostPage = async ({ params }: PostPageProps) => {
           </article>
         </BlurFade>
       </div>
-      <aside className="w-1/4 sticky top-10  h-screen hidden lg:block">
+      <aside className="w-1/4 sticky top-10  max-h-[50vh] hidden lg:block">
         {/* Table of contents */}
         <BlurFade delay={0.5} inView>
           <TableOfContents markdown={post?.markdown} />

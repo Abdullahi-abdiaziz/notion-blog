@@ -30,7 +30,7 @@ const MenuToggle = () => {
               Home
             </Link>
             <Link
-              href={"/posts"}
+              href={"/post"}
               className={`${
                 pathname === "/posts" &&
                 "font-bold px-1 py-0.5 rounded-sm bg-yellow-200 dark:text-slate-800"

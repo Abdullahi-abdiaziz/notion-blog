@@ -1,17 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { AlertTriangle, ArrowRight, Home, RefreshCcw } from "lucide-react";
 import Link from "next/link";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export default function Error() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[92vh] bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-950 dark:to-gray-900 px-4">
       <motion.div

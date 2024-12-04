@@ -54,7 +54,7 @@ export default async function Page() {
 
   return (
     <main className="min-h-screen">
-      <BlurFade delay={0.1} inView>
+      <BlurFade delay={0.025} inView>
         {/* <Pattern> */}
         <section className="mb-8 my-20 p-4 min-h-[50vh]  container flex justify-center items-center flex-col mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-2">
@@ -66,7 +66,7 @@ export default async function Page() {
           <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 items-center relative mt-6">
             <Button className="p-6">
               <Link
-                href="/posts"
+                href="/post"
                 className="text-base block"
                 style={{
                   minWidth: "50px", // Ensure a larger minimum width
@@ -106,7 +106,7 @@ export default async function Page() {
         <div className="mx-auto flex flex-wrap gap-8 py-8 px-5 justify-center items-center">
           {posts.length > 0 ? (
             recentPosts.map((post, index) => (
-              <Link key={post.id} href={`/posts/${post.slug}`}>
+              <Link key={post.id} href={`/post/${post.slug}`}>
                 <BlurFade delay={0.15 * index} inView>
                   <PostCard post={post} markdown={""} />
                 </BlurFade>

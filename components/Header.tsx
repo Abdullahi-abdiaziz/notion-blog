@@ -56,7 +56,7 @@ const Header = () => {
                 Home
               </Link>
               <Link
-                href={"/posts"}
+                href={"/post"}
                 className={`${
                   pathname === "/posts" &&
                   "font-bold bg-yellow-200  px-1 py-0.5 rounded-sm dark:text-slate-800 hover:text-slate-600 dark:hover:text-slate-700"

@@ -49,8 +49,12 @@ const TableOfContents: React.FC<{ markdown: string }> = ({ markdown }) => {
           }
         });
       },
-      { threshold: 0.9 }
-    ); // Adjust threshold as needed
+      {
+        root: null, // Use the viewport as the root
+        rootMargin: "0px 0px -90% 0px", // Trigger when top aligns with the viewport
+        threshold: 0.1, // Trigger as soon as the condition is met
+      }
+    );
 
     // Observe each heading
     headings.forEach(({ id }) => {
@@ -58,7 +62,7 @@ const TableOfContents: React.FC<{ markdown: string }> = ({ markdown }) => {
       if (element) observer.observe(element);
     });
 
-    // Cleanup function
+    // Cleanup
     return () => {
       headings.forEach(({ id }) => {
         const element = document.getElementById(id);
