@@ -220,7 +220,7 @@ const PostPage = async ({ params }: PostPageProps) => {
           <RelatedPosts tags={post.post.tags} title={post.post.title} />
         </BlurFade>
       </div>
-      <aside className="w-1/4 sticky top-10  max-h-[100vh] hidden lg:block">
+      <aside className="w-1/4 sticky top-10  max-h-[50vh] hidden lg:block">
         {/* Table of contents */}
         <BlurFade delay={0.5} inView>
           <TableOfContents markdown={post?.markdown} />

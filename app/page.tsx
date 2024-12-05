@@ -57,13 +57,13 @@ export default async function Page() {
       <BlurFade delay={0.025} inView>
         {/* <Pattern> */}
         <section className="mb-8 my-20 p-4 min-h-[50vh]  container flex justify-center items-center flex-col mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-2">
+          <h1 className="text-5xl md:text-5xl font-bold mb-2">
             Welcome to Our Kawtech Blog
           </h1>
-          <p className="text-xl md:text-2xl">
+          <p className="text-lg md:text-xl">
             Stay updated with the latest in web development and technology
           </p>
-          <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 items-center relative mt-6">
+          <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 items-center relative mt-10">
             <Button className="p-6">
               <Link
                 href="/post"

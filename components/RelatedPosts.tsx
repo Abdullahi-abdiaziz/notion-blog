@@ -18,29 +18,31 @@ const RelatedPosts: React.FC<{
   );
 
   return (
-    <div className="m-5 mt-10 lg:mx-24 border-2 dark:border-slate-800 p-4 rounded-sm">
-      <h2 className="text-lg md:text-xl font-bold mb-4 dark:text-white flex items-center gap-2 mx-3">
-        <BadgeInfo className="text-yellow-600" />
-        Related Posts
-      </h2>
-      <div className="flex flex-wrap gap-4">
-        {filteredPosts.map((post) => (
-          <div
-            key={post.id}
-            className="border-2 rounded-md bg-slate-100 dark:bg-slate-800 px-4 py-4"
-          >
-            <h3 className="text-md font-bold">{post.title}</h3>
-            <Link
-              href={`/post/${post.slug}`}
-              className="outline-primary mt-2 flex items-center justify-end text-cyan-600"
+    filteredPosts.length > 0 && (
+      <div className="m-5 mt-10 lg:mx-24 border-2 dark:border-slate-800 p-4 rounded">
+        <h2 className="text-lg md:text-xl font-bold mb-8 dark:text-white flex items-center gap-2 mx-3">
+          <BadgeInfo className="text-yellow-600" />
+          Related Posts
+        </h2>
+        <div className="flex flex-wrap gap-4 ">
+          {filteredPosts.map((post) => (
+            <div
+              key={post.id}
+              className="border-2 rounded-md bg-slate-100 dark:bg-slate-800 px-4 py-4"
             >
-              Read more
-              <span className="ml-2">→</span>
-            </Link>
-          </div>
-        ))}
+              <h3 className="text-md font-bold">{post.title}</h3>
+              <Link
+                href={`/post/${post.slug}`}
+                className="outline-primary mt-2 flex items-center justify-end text-cyan-600"
+              >
+                Read more
+                <span className="ml-2">→</span>
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    )
   );
 };
 
