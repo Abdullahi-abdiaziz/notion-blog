@@ -7,9 +7,15 @@ import { ThemeProvider } from "@/contexts/theme";
 import { Toaster } from "@/components/ui/toaster";
 import GridBackground from "@/components/ui/GridBackground";
 
-const geistMono = localFont({
+const geist = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geistMono", // Optional CSS variable
+  display: "swap", // Recommended for better performance
+});
+
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist", // Optional CSS variable
   display: "swap", // Recommended for better performance
 });
 
@@ -29,7 +35,7 @@ export default function RootLayout({
       <html lang="en">
         <body>
           <div
-            className={`${geistMono.className} font-sans bg-slate-50 dark:bg-slate-900`}
+            className={`${geist.className} font-sans bg-slate-50 dark:bg-slate-900`}
           >
             <GridBackground>
               <Header />

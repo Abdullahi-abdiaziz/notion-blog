@@ -20,8 +20,8 @@ const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
         className={` flex justify-center items-center"`}
         href={`${
           hasPrevPage
-            ? `posts?page=${Number(page) - 1}&per_page=${per_page}`
-            : `posts?page=${Number(page)}&per_page=${per_page}`
+            ? `post?page=${Number(page) - 1}&per_page=${per_page}`
+            : `post?page=${Number(page)}&per_page=${per_page}`
         }`}
         {...(hasPrevPage ? {} : { disabled: true })}
       >
@@ -54,8 +54,8 @@ const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
         className={`  flex items-center justify-center rounded-md"`}
         href={`${
           hasNextPage
-            ? `posts?page=${Number(page) + 1}&per_page=${per_page}`
-            : `posts?page=${Number(page)}&per_page=${per_page}`
+            ? `post?page=${Number(page) + 1}&per_page=${per_page}`
+            : `post?page=${Number(page)}&per_page=${per_page}`
         }`}
         {...(hasNextPage ? {} : { disabled: true })}
       >

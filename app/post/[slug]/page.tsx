@@ -14,6 +14,7 @@ import { extractHeadings } from "@/services/extract-heading";
 import BlurFade from "@/components/ui/blur-fade";
 import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 import localFont from "next/font/local";
+import RelatedPosts from "@/components/RelatedPosts";
 
 const TableOfContents = dynamic(
   () => import("../../../components/TableOfContent"),
@@ -25,12 +26,6 @@ const TableOfContents = dynamic(
 interface PostPageProps {
   params: { slug: string };
 }
-
-const geistMono = localFont({
-  src: "../../fonts/GeistMonoVF.woff",
-  variable: "--font-geistMono", // Optional CSS variable
-  display: "swap", // Recommended for better performance
-});
 
 export async function generateMetadata({
   params,
@@ -185,13 +180,13 @@ const PostPage = async ({ params }: PostPageProps) => {
                       children={String(children).replace(/\n$/, "")}
                       theme={xcode}
                       // style={github as any}
-                      className={`${geistMono.className} bg-transparent`}
+                      className={`bg-transparent`}
                       language={match[1]}
                       {...props}
                     />
                   ) : (
                     <code
-                      className={`bg-gray-400 dark:bg-gray-300 text-gray-900 dark:text-gray-800  font-mono font-bold text-xs m-0  rounded-sm`}
+                      className={`bg-rose-100 dark:bg-rose-100 text-pink-800 dark:text-pink-800 font- font-semibold text-sm m-0 rounded-sm`}
                       {...props}
                     >
                       {children}
@@ -222,9 +217,10 @@ const PostPage = async ({ params }: PostPageProps) => {
               {post?.markdown}
             </Markdown>
           </article>
+          <RelatedPosts tags={post.post.tags} title={post.post.title} />
         </BlurFade>
       </div>
-      <aside className="w-1/4 sticky top-10  max-h-[50vh] hidden lg:block">
+      <aside className="w-1/4 sticky top-10  max-h-[100vh] hidden lg:block">
         {/* Table of contents */}
         <BlurFade delay={0.5} inView>
           <TableOfContents markdown={post?.markdown} />
