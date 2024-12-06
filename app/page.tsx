@@ -95,7 +95,7 @@ export default async function Page() {
         {/* </Pattern> */}
       </BlurFade>
 
-      <section className="bg-slate-100 dark:bg-slate-800 py-10 rounded-md flex flex-col justify-start mx-auto w-full max-w-screen-2xl">
+      <section className="bg-slate-100 dark:bg-slate-800 py-10 rounded-md flex flex-col justify-start mx-auto w-full max-w-[1600px]">
         <BlurFade delay={0.5} inView>
           <h2 className="flex items-center justify-center gap-2 mx-5 sm:mx-10  lg:mx-32 font-extrabold text-xl container dark:text-white rounded-md w-fit px-2 py-1">
             <FileSignatureIcon size={25} />
