@@ -19,7 +19,7 @@ const RelatedPosts: React.FC<{
 
   return (
     filteredPosts.length > 0 && (
-      <div className="m-5 mt-20 lg:mx-24 border-l-8 border-green-500 bg-green-50 dark:bg-green-950 dark:border-green-800 p-4 rounded-lg">
+      <div className="m-5 my-20  lg:mx-20 border-l-8 border-green-500 bg-green-50 dark:bg-green-950 dark:border-green-800 p-4 rounded-lg">
         <h2 className="text-lg md:text-xl font-bold mb-8 dark:text-white flex items-center gap-2 mx-3">
           <BadgeInfo className="text-yellow-600" />
           Related Posts

@@ -58,8 +58,9 @@ const Header = () => {
               <Link
                 href={"/post"}
                 className={`${
-                  pathname === "/posts" &&
-                  "font-bold bg-yellow-200  px-1 py-0.5 rounded-sm dark:text-slate-800 hover:text-slate-600 dark:hover:text-slate-700"
+                  pathname === "/post" ||
+                  (pathname.includes("post") &&
+                    "font-bold bg-yellow-200  px-1 py-0.5 rounded-sm dark:text-slate-800 hover:text-slate-600 dark:hover:text-slate-700")
                 } hover:text-slate-700 dark:hover:text-slate-200 `}
               >
                 Posts
