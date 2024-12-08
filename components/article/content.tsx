@@ -31,9 +31,10 @@ const Content = ({ post }: { post: PostPage }) => {
             const id = extractId(children, headings, 4);
             return <Heading children={children} id={id} level={4} />;
           },
-
-          code({ className, children, ...props }) {
-            return <Code children={children} {...props} />;
+          code: ({ children, className, ...props }) => {
+            return (
+              <Code children={children} className={className} {...props} />
+            );
           },
         }}
       >
