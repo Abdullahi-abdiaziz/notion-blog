@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Pattern from "@/components/Pattern";
+import SubscribtionForm from "@/components/SubscribtionForm";
 
 export default async function Page() {
   const notionServices = new NotionService();
@@ -21,7 +22,7 @@ export default async function Page() {
     <main className="min-h-screen">
       <HeroComponent />
       <RecentPosts recentPosts={recentPosts} posts={posts} />
-      <SubscribeComponent />
+      <SubscribtionForm />
     </main>
   );
 }
@@ -54,49 +55,6 @@ const RecentPosts = ({
         ) : (
           <p>No posts published yet!.</p>
         )}
-      </div>
-    </section>
-  );
-};
-
-const SubscribeComponent = () => {
-  return (
-    <section className="w-full py-12 md:py-24 lg:py-32" id="subscribe">
-      <div className="flex justify-between items-center border-2 rounded-md  p-10 px-4 max-w-screen-xl mx-2 sm:mx-auto ">
-        <div className="container px-4 md:px-6 mx-auto">
-          <div className="space-y-8">
-            <h2 className="text-xl font-bold tracking-tighter flex items-center gap-2">
-              <LucideNewspaper />
-              Stay Updated
-            </h2>
-            <p className="mx-auto text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              Subscribe to our newsletter for the latest tech insights and blog
-              updates.
-            </p>
-          </div>
-          <div className="w-full max-w-screen-md mt-8">
-            <form className="flex flex-col md:flex-row space-y-5 md:space-y-0 space-x-2 md:items-center ">
-              <Input
-                className="max-w-lg flex-1"
-                placeholder="Enter your email"
-                type="email"
-              />
-              <Button type="submit" size={"lg"}>
-                Subscribe
-              </Button>
-            </form>
-          </div>
-        </div>
-        <Pattern>
-          <div className="hidden md:block">
-            <Image
-              src="/subscribe.png"
-              width={400}
-              height={400}
-              alt="Picture of the author"
-            />
-          </div>
-        </Pattern>
       </div>
     </section>
   );

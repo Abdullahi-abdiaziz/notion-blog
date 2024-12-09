@@ -25,7 +25,7 @@ const Code: React.FC<CodeProps> = ({ className, children, ...props }) => {
     </SyntaxHighlighter>
   ) : (
     <code
-      className="bg-neutral-900 dark:bg-neutral-100 text-stone-300 dark:text-pink-800 font-semibold text-sm m-0 rounded-sm px-2 p-1.5"
+      className="bg-neutral-900 dark:bg-neutral-100 text-stone-300 dark:text-pink-800 mx-1 text-xs font-medium m-0 rounded-sm px-1.5 py-0.5"
       {...props}
     >
       {children}

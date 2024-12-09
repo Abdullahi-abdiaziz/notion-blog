@@ -1,10 +1,35 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { subscribeAction } from "@/lib/action";
 import { Facebook, Twitter, Instagram, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const subscriptionSchema = z.object({
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+});
+
+type SubscriptionFormValues = z.infer<typeof subscriptionSchema>;
 
 export default function Footer() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<SubscriptionFormValues>({
+    resolver: zodResolver(subscriptionSchema),
+  });
+
+  const onSubmit = async (data: SubscriptionFormValues) => {
+    await subscribeAction(data.email, reset); // Simulate async operation
+  };
+
   return (
     <footer className="bg-muted py-12 mt-auto bg-white dark:bg-slate-950 relative border-t-2">
       <div className="container mx-auto px-4">
@@ -81,16 +106,32 @@ export default function Footer() {
             </p>
             <form
               className="flex flex-col space-y-2"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSubmit(onSubmit)}
             >
               <Input
                 type="email"
                 placeholder="Enter your email"
                 aria-label="Email for newsletter"
+                {...register("email")}
+                aria-invalid={!!errors.email}
+                disabled={isSubmitting}
               />
-              <Button type="submit" className="w-full">
-                Subscribe
-                <Mail className="ml-2 h-4 w-4" />
+
+              {errors.email && (
+                <div id="email-error" className=" text-sm text-red-500">
+                  {errors.email.message}
+                </div>
+              )}
+
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <div className="loading loading-dots loading-md  flex justify-center items-center p-2"></div>
+                ) : (
+                  <>
+                    Subscribe
+                    <Mail className="ml-2 h-4 w-4" />
+                  </>
+                )}
               </Button>
             </form>
           </div>

@@ -1,0 +1,7 @@
+### Add a new subscription email
+POST http://localhost/api/subscribe
+Content-Type: "application/json"
+
+{
+  "email": "johndoe@gmail.com"
+}
