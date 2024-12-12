@@ -49,11 +49,11 @@ const SubscriptionForm = () => {
           </div>
           <div className="w-full max-w-screen-md mt-8">
             <form
-              className="flex flex-col md:flex-row space-y-5 md:space-y-0 space-x-2 items-center"
+              className="flex flex-col md:flex-row space-y-5 md:space-y-0 space-x-2 items-center "
               onSubmit={handleSubmit(onSubmit)}
             >
               <Input
-                className="max-w-lg flex-1 mb-2"
+                className="max-w-lg flex-1"
                 type="email"
                 id="email"
                 placeholder="Enter your email"
@@ -63,6 +63,7 @@ const SubscriptionForm = () => {
                 disabled={isSubmitting}
               />
               <Button
+                size={"md"}
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full sm:w-fit"

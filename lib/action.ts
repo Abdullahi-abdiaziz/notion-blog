@@ -12,21 +12,22 @@ export const subscribeAction = async (email: string, reset: () => void) => {
     const data = await res.json();
     if (res.ok) {
       toast({
-        title: "Success",
+        variant: "success",
+        title: "🟢 Success",
         description: `${data.message}`,
       });
       reset();
     } else {
       toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
+        variant: "error",
+        title: "🔴 Uh oh! Something went wrong.",
         description: data.message,
       });
     }
   } catch (error: any) {
     toast({
-      variant: "destructive",
-      title: "Uh oh! Something went wrong.",
+      variant: "error",
+      title: "🔴 Uh oh! Something went wrong.",
       description: error.message,
     });
   }
