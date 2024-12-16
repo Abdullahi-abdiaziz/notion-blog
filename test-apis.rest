@@ -5,3 +5,6 @@ Content-Type: "application/json"
 {
   "email": "johndoe@gmail.com"
 }
+
+### Get all subscription emails
+GET http://localhost/api/subscribe

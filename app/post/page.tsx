@@ -1,12 +1,9 @@
 import PaginationControlls from "@/components/PaginationControlls";
 import SearchForm from "@/components/searchForm";
 import BlurFade from "@/components/ui/blur-fade";
-import { Button } from "@/components/ui/button";
-import { Card, CardTitle } from "@/components/ui/card";
 import PostGrid from "@/components/ui/post-grid";
 import NotionService from "@/services/notion-service";
 import { BlogPost } from "@/types/schema";
-import Link from "next/link";
 import React from "react";
 
 const page = async ({

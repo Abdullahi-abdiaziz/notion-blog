@@ -8,7 +8,7 @@ const connect = async () => {
   }
 
   if (!process.env.MONGODB_URI) {
-    throw new Error("No MongoDB URI provided");
+    throw new Error("No Database URI provided");
   }
 
   try {
@@ -16,9 +16,9 @@ const connect = async () => {
       serverSelectionTimeoutMS: 20000, // Optional: Increase timeout
     });
     isConnected = db.connections[0].readyState === 1;
-    console.log("Connected to MongoDB");
+    console.log("Connected to Database");
   } catch (error: any) {
-    console.error("Error connecting to MongoDB:", error.message);
+    console.error("Error connecting to Database:", error.message);
     throw new Error("Database connection failed");
   }
 };
