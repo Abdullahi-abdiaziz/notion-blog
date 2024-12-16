@@ -63,34 +63,34 @@ export const POST = async (req: NextRequest) => {
 };
 
 // Function to save an admin user to the database
-export const saveAdmin = async (req: NextRequest) => {
-  try {
-    const body = await req.json();
+// export const Post = async (req: NextRequest) => {
+//   try {
+//     const body = await req.json();
 
-    // Validate input data
-    if (!body.username || !body.password) {
-      return NextResponse.json({ error: "Invalid data" }, { status: 400 });
-    }
+//     // Validate input data
+//     if (!body.username || !body.password) {
+//       return NextResponse.json({ error: "Invalid data" }, { status: 400 });
+//     }
 
-    // Connect to the database
-    await connect();
+//     // Connect to the database
+//     await connect();
 
-    // Save admin to the database
-    const admin = new Admin({
-      username: body.username,
-      password: body.password,
-    });
-    await admin.save();
+//     // Save admin to the database
+//     const admin = new Admin({
+//       username: body.username,
+//       password: body.password,
+//     });
+//     await admin.save();
 
-    return NextResponse.json(
-      { message: "Admin user saved successfully" },
-      { status: 201 }
-    );
-  } catch (error) {
-    console.error("Error saving admin user:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
-  }
-};
+//     return NextResponse.json(
+//       { message: "Admin user saved successfully" },
+//       { status: 201 }
+//     );
+//   } catch (error) {
+//     console.error("Error saving admin user:", error);
+//     return NextResponse.json(
+//       { error: "Internal Server Error" },
+//       { status: 500 }
+//     );
+//   }
+// };
