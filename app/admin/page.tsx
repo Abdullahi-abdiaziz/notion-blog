@@ -18,10 +18,13 @@ import { Input } from "@/components/ui/input";
 import { Icons } from "@/components/ui/icons";
 import { loginAction, verifyToken } from "@/lib/action";
 import Cookie from "js-cookie";
+import { useAuth } from "@/contexts/auth";
 
 const LoginForm = () => {
   const router = useRouter();
+  const { isAuthenticated } = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoggedin, setIsLoggedin] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const form = useForm<LoginFormValues>({
@@ -34,7 +37,6 @@ const LoginForm = () => {
 
   useEffect(() => {
     const getJWTFromCookies = async () => {
-      // Example using js-cookie:
       const token = Cookie.get("token");
 
       if (token) {
@@ -44,7 +46,7 @@ const LoginForm = () => {
     };
 
     getJWTFromCookies();
-  }, []);
+  }, []); // Run only on component mount
 
   async function onSubmit(values: LoginFormValues) {
     setIsLoading(true);
@@ -53,7 +55,9 @@ const LoginForm = () => {
         username: values.username,
         password: values.password,
       });
-      await router.push("/dashboard");
+
+      // Navigate directly to dashboard after login success
+      router.push("/dashboard");
     } catch (error) {
       setErrorMessage(
         "Failed to sign in. Please check your credentials and try again."

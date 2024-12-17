@@ -42,7 +42,10 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   // Update the body class whenever the theme changes
   useEffect(() => {
-    document.body.classList.remove("light", "dark");
+    if (theme) {
+      document.body.classList.remove("light", "dark");
+      document.body.classList.add(theme);
+    }
     document.body.classList.add(theme);
   }, [theme]);
 
