@@ -39,7 +39,7 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 // Hook for consuming the authentication context
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = (): AuthContextType => useContext(AuthContext);
 
 // AuthProvider component
 export const AuthProvider = ({ children }: AuthProviderProps) => {
