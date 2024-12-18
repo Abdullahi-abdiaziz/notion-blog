@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import Cookie from "js-cookie";
 import { jwtDecode } from "jwt-decode"; // Optional: Use for decoding tokens
+import { Jwt } from "jsonwebtoken";
 
 // Define the shape of the authentication context
 interface AuthContextType {

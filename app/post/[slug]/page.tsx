@@ -9,14 +9,6 @@ import NotionService from "@/services/notion-service";
 import BlurFade from "@/components/ui/blur-fade";
 import RelatedPosts from "@/components/RelatedPosts";
 import Article from "@/components/article/content";
-import Link from "next/link";
-import {
-  ArrowBigLeft,
-  ArrowRight,
-  ArrowUpLeftFromSquare,
-  LucideArrowRightSquare,
-  SlashSquare,
-} from "lucide-react";
 
 const TableOfContents = dynamic(
   () => import("../../../components/TableOfContent"),

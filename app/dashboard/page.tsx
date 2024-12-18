@@ -1,7 +1,9 @@
+"use client";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import jwt from "jsonwebtoken";
 import AdminDashboard from "@/components/AdminDashboard";
+import { withAuth } from "@/components/hoc/WithAuth";
 
 interface User {
   username: string;
@@ -44,4 +46,4 @@ const Dashboard = async () => {
   // }
 };
 
-export default Dashboard;
+export default withAuth(Dashboard, { redirectUnauthenticatedTo: "/admin" });

@@ -1,5 +1,4 @@
 import { toast } from "@/hooks/use-toast";
-import { redirect } from "next/navigation";
 
 export const subscribeAction = async (email: string, reset: () => void) => {
   await new Promise((resolve) => setTimeout(resolve, 1000));
