@@ -1,9 +1,8 @@
 "use client";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import jwt from "jsonwebtoken";
+
 import AdminDashboard from "@/components/AdminDashboard";
-import { withAuth } from "@/components/hoc/WithAuth";
+import withAuth from "@/components/hoc/WithAuth";
+import { Suspense } from "react";
 
 interface User {
   username: string;
@@ -34,9 +33,11 @@ const Dashboard = async () => {
 
   // If the user has the "admin" role, render the dashboard
   return (
-    <main className="min-h-[00vh] max-w-[1400px] relative mx-auto flex justify-center items-center my-10">
-      <AdminDashboard />
-    </main>
+    <Suspense fallback={<div>Loading...</div>}>
+      <main className="min-h-[00vh] max-w-[1400px] relative mx-auto flex justify-center items-center my-10">
+        <AdminDashboard />
+      </main>
+    </Suspense>
   );
 
   // If valid, render the dashboard
@@ -46,4 +47,4 @@ const Dashboard = async () => {
   // }
 };
 
-export default withAuth(Dashboard, { redirectUnauthenticatedTo: "/admin" });
+export default Dashboard;

@@ -24,6 +24,7 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
     "framer-motion": "^11.11.9",
+    "jose": "^5.9.6",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
@@ -44,7 +45,8 @@
     "table": "^6.9.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.15",

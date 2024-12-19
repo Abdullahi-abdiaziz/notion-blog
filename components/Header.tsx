@@ -1,24 +1,22 @@
 "use client";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { useTheme } from "@/contexts/theme";
-import Logo from "./Logo";
+import Link from "next/link";
+// import { useAuth } from "@/contexts/auth";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import MenuToggle from "./MenuToggle";
-import { useAuth } from "@/contexts/auth";
-import { Button } from "./ui/button";
-import { AvatarIcon } from "@radix-ui/react-icons";
+import Logo from "./Logo";
+import useThemeStore from "@/store/themeStore";
 
 const Header = () => {
-  const { theme, setTheme } = useTheme();
-  const { isAuthenticated, logout } = useAuth();
+  // const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useThemeStore();
+  // const { isAuthenticated, logout } = useAuthStore();
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
   const [prevScrollY, setPrevScrollY] = useState(0);
-  const [isPopupVisible, setIsPopupVisible] = useState(false); // Popup state
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
-  // Handle scroll to show/hide header
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -36,13 +34,12 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollY]);
 
-  // Show/hide protected popup
   const togglePopup = () => setIsPopupVisible((prev) => !prev);
 
-  const handleLogout = () => {
-    logout();
-    setIsPopupVisible(false);
-  };
+  // const handleLogout = () => {
+  //   logout();
+  //   setIsPopupVisible(false);
+  // };
 
   return (
     <header
@@ -56,7 +53,7 @@ const Header = () => {
           <div className="flex items-center gap-5">
             <nav className="md:flex gap-2 sm:gap-6 lg:gap-10 items-center hidden">
               <Link
-                href={"/"}
+                href="/"
                 className={`${
                   pathname === "/" &&
                   "font-bold bg-yellow-200 px-1 py-0.5 rounded-sm dark:text-slate-800 hover:text-slate-600 dark:hover:text-slate-700"
@@ -65,7 +62,7 @@ const Header = () => {
                 Home
               </Link>
               <Link
-                href={"/post"}
+                href="/post"
                 className={`${
                   pathname === "/posts" ||
                   (pathname.includes("post") &&
@@ -75,19 +72,43 @@ const Header = () => {
                 Posts
               </Link>
               <Link
-                href={"/contact"}
+                href="/contact"
                 className={`${
                   pathname === "/contact" &&
-                  "font-bold bg-yellow-200 px-1 py-0.5 rounded-sm dark:text-slate-800 hover:text-slate-600 dark:hover:text-slate-700"
+                  "font-bold bg-yellow-200 px-1 py-0.5 rounded-sm dark:text-slate-800 hover:text-slate-600 dark:hover:text-slate-200"
                 } hover:text-slate-600 dark:hover:text-slate-200`}
               >
                 Contact
               </Link>
-              {isAuthenticated && (
-                <Button variant="ghost" onClick={togglePopup}>
-                  <AvatarIcon className="cursor-pointer" />
-                </Button>
-              )}
+              {/* {isAuthenticated && (
+                <>
+                  <Button variant="ghost" onClick={togglePopup}>
+                    <AvatarIcon className="cursor-pointer" />
+                  </Button>
+                  {isPopupVisible && (
+                    <div className="absolute right-40 top-12 w-48 bg-white dark:bg-gray-800 border rounded-md shadow-md p-2">
+                      <ul className="flex flex-col gap-2">
+                        <li>
+                          <Link
+                            href="/dashboard"
+                            className="block px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+                          >
+                            Dashboard
+                          </Link>
+                        </li>
+                        <li>
+                          <button
+                            onClick={handleLogout}
+                            className="w-full text-left px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+                          >
+                            Logout
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </>
+              )} */}
             </nav>
             <MenuToggle />
             <button
@@ -104,30 +125,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-
-      {/* Protected Popup */}
-      {isPopupVisible && (
-        <div className="absolute right-40 top-12 w-48 bg-white dark:bg-gray-800 border rounded-md shadow-md p-2">
-          <ul className="flex flex-col gap-2">
-            <li>
-              <Link
-                href="/dashboard"
-                className="block px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-              >
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <button
-                onClick={handleLogout}
-                className="w-full text-left px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-              >
-                Logout
-              </button>
-            </li>
-          </ul>
-        </div>
-      )}
     </header>
   );
 };

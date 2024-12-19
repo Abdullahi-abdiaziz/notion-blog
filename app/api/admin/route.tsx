@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "default_secret";
 
-// Function to handle admin login
 export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();
@@ -19,12 +18,11 @@ export const POST = async (req: NextRequest) => {
     await connect();
 
     // Check if the admin user exists
-    const isAdmin = await Admin.exists({
+    const isAdmin = await Admin.findOne({
       username: body.username,
-      password: body.password, // Ensure password is hashed in production
     });
 
-    if (!isAdmin) {
+    if (!isAdmin || isAdmin.password !== body.password) {
       return NextResponse.json(
         { error: "Invalid credentials" },
         { status: 401 }
@@ -40,7 +38,7 @@ export const POST = async (req: NextRequest) => {
 
     // Create a response with the token as a cookie
     const response = NextResponse.json(
-      { message: "Logged in successfully", token }, // Optionally return the token in the body
+      { message: "Logged in successfully", token },
       { status: 200 }
     );
 
@@ -48,7 +46,7 @@ export const POST = async (req: NextRequest) => {
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), // 30 days
       path: "/",
-      httpOnly: process.env.NODE_ENV === "production", // Prevent client-side access
+      httpOnly: false, // Prevent client-side access
       sameSite: "strict", // Protect against CSRF
     });
 

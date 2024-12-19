@@ -1,13 +1,14 @@
 "use client";
-import { withAuth } from "@/components/hoc/WithAuth";
+
+import withAuth from "@/components/hoc/WithAuth";
 import LoginForm from "@/components/LoginForm";
 
 function page() {
   return (
-    <div>
+    <section>
       <LoginForm />
-    </div>
+    </section>
   );
 }
 
-export default withAuth(page, { redirectAuthenticatedTo: "/dashboard" });
+export default page;

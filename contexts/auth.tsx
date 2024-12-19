@@ -1,89 +1,87 @@
-"use client";
+// "use client";
 
-import React, {
-  useContext,
-  useState,
-  createContext,
-  ReactNode,
-  useEffect,
-} from "react";
-import Cookie from "js-cookie";
-import { jwtDecode } from "jwt-decode"; // Optional: Use for decoding tokens
-import { Jwt } from "jsonwebtoken";
+// import React, {
+//   useContext,
+//   useState,
+//   createContext,
+//   ReactNode,
+//   useEffect,
+// } from "react";
+// import Cookies from "js-cookie";
+// import { jwtDecode } from "jwt-decode"; // Ensure proper import
+// import { useRouter } from "next/navigation";
 
-// Define the shape of the authentication context
-interface AuthContextType {
-  user: UserType | null;
-  isAuthenticated: boolean;
-  loading: boolean;
-  logout: () => void;
-}
+// // Define the user type based on your token payload
+// interface UserType {
+//   username: string;
+//   role: string;
+// }
 
-// Shape of user data (replace with actual structure of your token payload)
-interface UserType {
-  id: string;
-  email: string;
-  name?: string;
-  // Add more fields as needed
-}
+// // Define the authentication context type
+// interface AuthContextType {
+//   user: UserType | null;
+//   isAuthenticated: boolean;
+//   loading: boolean;
+//   logout: () => void;
+// }
 
-interface AuthProviderProps {
-  children: ReactNode;
-}
+// // Define props for the AuthProvider
+// interface AuthProviderProps {
+//   children: ReactNode;
+// }
 
-// Create the AuthContext
-const AuthContext = createContext<AuthContextType>({
-  user: null,
-  isAuthenticated: false,
-  loading: true,
-  logout: () => {},
-});
+// // Create the AuthContext with default values
+// const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Hook for consuming the authentication context
-export const useAuth = (): AuthContextType => useContext(AuthContext);
+// // Hook for consuming the AuthContext
+// export const useAuth = (): AuthContextType => {
+//   const context = useContext(AuthContext);
+//   if (!context) {
+//     throw new Error("useAuth must be used within an AuthProvider");
+//   }
+//   return context;
+// };
+// export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+//   const [user, setUser] = useState<UserType | null>(null);
+//   const [loading, setLoading] = useState(true);
+//   const router = useRouter();
 
-// AuthProvider component
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<UserType | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+//   useEffect(() => {
+//     const fetchToken = async () => {
+//       const token = Cookies.get("token");
 
-  // Fetch and validate the token from cookies
-  useEffect(() => {
-    const authenticateUser = async () => {
-      try {
-        const token = Cookie.get("token");
-        console.log(token);
+//       if (token) {
+//         try {
+//           const decodedToken = jwtDecode<UserType>(token);
+//           setUser(decodedToken);
 
-        if (token) {
-          // Decode the token and validate it
-          const decoded = jwtDecode<UserType>(token); // Optional, use only if needed
-          setUser(decoded); // Set the decoded user data
-          console.log(JSON.stringify(decoded));
-        } else {
-          setUser(null);
-        }
-      } catch (error) {
-        console.error("Error decoding token:", error);
-        setUser(null);
-      } finally {
-        setLoading(false);
-      }
-    };
+//           // Redirect to dashboard if user is authenticated
+//           if (decodedToken) {
+//             router.push("/dashboard");
+//           }
+//         } catch (error) {
+//           console.error("Error decoding token:", error);
+//           Cookies.remove("token");
+//         }
+//       }
 
-    authenticateUser();
-  }, []);
+//       setLoading(false);
+//     };
 
-  // Logout handler: Clear cookies and state
-  const logout = () => {
-    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    setUser(null);
-  };
+//     fetchToken();
+//   }, []);
 
-  const isAuthenticated = !!user;
+//   const logout = () => {
+//     Cookies.remove("token");
+//     setUser(null); // Clear user state
+//     router.push("/admin"); // Redirect to admin login page
+//   };
 
-  return (
-    <AuthContext.Provider value={{ user, isAuthenticated, loading, logout }}>
-      {!loading && children}
-    </AuthContext.Provider>
-  );
-};
+//   const isAuthenticated = !!user;
+
+//   return (
+//     <AuthContext.Provider value={{ user, isAuthenticated, loading, logout }}>
+//       {!loading && children}
+//     </AuthContext.Provider>
+//   );
+// };

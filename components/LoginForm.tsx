@@ -17,12 +17,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Icons } from "@/components/ui/icons";
 import { loginAction } from "@/lib/action";
-import { useAuth } from "@/contexts/auth";
-import { withAuth } from "@/components/hoc/WithAuth";
 
 const LoginForm = () => {
   const router = useRouter();
-  const { isAuthenticated } = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -41,13 +38,17 @@ const LoginForm = () => {
     setErrorMessage(null); // Reset error message
     try {
       // Call login API
-      await loginAction({
+      const success = await loginAction({
         username: values.username,
         password: values.password,
       });
 
-      // Navigate to dashboard on success
-      await router.push("/dashboard");
+      if (success) {
+        console.log("Navigating to dashboard..."); // Debug navigation
+        router.push("/dashboard");
+      } else {
+        console.error("Error returned from loginAction");
+      }
     } catch (error) {
       setErrorMessage(
         "Failed to sign in. Please check your credentials and try again."

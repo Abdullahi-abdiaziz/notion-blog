@@ -40,7 +40,6 @@ export const loginAction = async ({
   username: string;
   password: string;
 }) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
   try {
     const res = await fetch("/api/admin", {
       method: "POST",
@@ -50,11 +49,15 @@ export const loginAction = async ({
 
     const data = await res.json();
     if (res.ok) {
+      // Store the token in cookies or use another secure method
+
       toast({
         variant: "success",
         title: "🟢 Success",
         description: `${data.message}`,
       });
+
+      return data; // Return token or other response data if needed
     } else {
       toast({
         variant: "error",
@@ -63,10 +66,11 @@ export const loginAction = async ({
       });
     }
   } catch (error: any) {
+    console.error("Login error:", error);
     toast({
       variant: "error",
       title: "🔴 Uh oh! Something went wrong.",
-      description: error.error,
+      description: error.message || "An unexpected error occurred.",
     });
   }
 };
