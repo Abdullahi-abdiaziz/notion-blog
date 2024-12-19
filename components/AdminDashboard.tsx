@@ -1,11 +1,28 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { RecentNewsletters } from "@/components/ui/recent-newsletters";
 import { Overview } from "@/components/ui/overview";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function AdminDashboard() {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    Cookies.remove("token");
+    router.push("/admin");
+  };
+
   return (
     <div className="flex-1 space-y-4 p-4 pt-6">
-      <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <button
+          onClick={handleLogout}
+          className="bg-red-500 text-white px-4 py-2 rounded"
+        >
+          Logout
+        </button>
+      </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
