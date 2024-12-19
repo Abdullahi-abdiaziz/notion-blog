@@ -47,4 +47,4 @@ const Dashboard = async () => {
   // }
 };
 
-export default Dashboard;
+export default withAuth(Dashboard, { requiresAuth: true });

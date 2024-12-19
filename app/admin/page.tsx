@@ -11,4 +11,4 @@ function page() {
   );
 }
 
-export default page;
+export default withAuth(page, { requiresAuth: false });
