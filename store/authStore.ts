@@ -1,5 +1,3 @@
-// stores/authStore.js
-
 import { create } from "zustand";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
@@ -20,15 +18,12 @@ const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: false,
   user: null,
   checkAuth: () => {
-    // Check if the token exists in cookies
     const token = Cookies.get("token");
-    console.log("Token:", token); // Add this line to log the token value to the console
     if (token) {
       try {
         const user = jwtDecode<UserType>(token);
         set({ isAuthenticated: true, user });
 
-        // Redirect to dashboard if user is authenticated
         if (!user) {
           window.location.href = "/admin";
           set({ isAuthenticated: false, user: null });
