@@ -3,13 +3,19 @@ import { RecentNewsletters } from "@/components/ui/recent-newsletters";
 import { Overview } from "@/components/ui/overview";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { LogOutIcon } from "lucide-react";
+import { useState } from "react";
 
 export default function AdminDashboard() {
   const router = useRouter();
+  const [isPending, setIsPending] = useState(false);
 
   const handleLogout = () => {
+    setIsPending(true);
     Cookies.remove("token");
+
     router.push("/admin");
+    setIsPending(false);
   };
 
   return (
@@ -20,7 +26,14 @@ export default function AdminDashboard() {
           onClick={handleLogout}
           className="bg-red-500 text-white px-4 py-2 rounded"
         >
-          Logout
+          {isPending ? (
+            <div>Loading...</div>
+          ) : (
+            <span className="flex items-center gap-2">
+              <LogOutIcon className="h-4 w-4" />
+              Logout
+            </span>
+          )}
         </button>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

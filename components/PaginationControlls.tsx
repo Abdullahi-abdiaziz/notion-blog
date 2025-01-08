@@ -1,77 +1,54 @@
 "use client";
 import React from "react";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeftSquare, ArrowRightSquare } from "lucide-react";
 
-type PaginationProps = {
+interface PaginationControlsProps {
   hasNextPage: boolean;
   hasPrevPage: boolean;
-};
+  onNextPage: () => void;
+  onPrevPage: () => void;
+  currentPage: number;
+  totalPages: number;
+}
 
-const PaginationControlls = ({ hasNextPage, hasPrevPage }: PaginationProps) => {
-  const searchParams = useSearchParams();
-
-  const page = searchParams.get("page") ?? "1";
-  const per_page = searchParams.get("per_page") ?? "6";
+const PaginationControls = ({
+  hasNextPage,
+  hasPrevPage,
+  onNextPage,
+  onPrevPage,
+  currentPage,
+  totalPages,
+}: PaginationControlsProps) => {
   return (
-    <div className="flex gap-2 items-center justify-center mt-10  px-2 py-1 rounded-md w-fit mx-auto">
-      <Link
-        className={` flex justify-center items-center"`}
-        href={`${
+    <div className="flex items-center justify-center gap-4 mt-8">
+      <button
+        onClick={onPrevPage}
+        disabled={!hasPrevPage}
+        className={`px-4 py-2 rounded-lg ${
           hasPrevPage
-            ? `post?page=${Number(page) - 1}&per_page=${per_page}`
-            : `post?page=${Number(page)}&per_page=${per_page}`
-        }`}
-        {...(hasPrevPage ? {} : { disabled: true })}
+            ? "bg-blue-500 text-white hover:bg-blue-600"
+            : "bg-gray-300 text-gray-500 cursor-not-allowed"
+        } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
       >
-        <div
-          className={`px-2 py-1 rounded-md border flex gap-1 items-center ${
-            !hasPrevPage
-              ? "text-gray-600 dark:text-gray-400 bg-slate-100 dark:bg-slate-800 "
-              : "text-blue-600 dark:text-blue-600 bg-white dark:bg-black"
-          }`}
-        >
-          <ArrowLeftSquare size={16} />
-          <p>Previous</p>
-        </div>
-      </Link>
+        Previous
+      </button>
 
-      <div className="text-black dark:text-white flex gap-1">
-        <span className="font-bold  w-8 text-center flex items-center justify-center  rounded-sm bg-white dark:bg-slate-950 shadow-lg">
-          {hasPrevPage && Number(page) - 1}
-        </span>
+      <span className="text-gray-700 dark:text-gray-400">
+        Page {currentPage} of {totalPages}
+      </span>
 
-        <span className="px-3 py-0.5 rounded-sm shadow-lg bg-green-100 text-green-900 font-bold border scale-125 ml-2 mr-2">
-          {page}
-        </span>
-        <span className="font-bold w-8 text-center flex justify-center items-center  rounded-sm bg-white dark:bg-slate-950 shadow-lg">
-          {hasNextPage && Number(page) + 1}
-        </span>
-      </div>
-
-      <Link
-        className={`  flex items-center justify-center rounded-md"`}
-        href={`${
+      <button
+        onClick={onNextPage}
+        disabled={!hasNextPage}
+        className={`px-4 py-2 rounded-lg ${
           hasNextPage
-            ? `post?page=${Number(page) + 1}&per_page=${per_page}`
-            : `post?page=${Number(page)}&per_page=${per_page}`
-        }`}
-        {...(hasNextPage ? {} : { disabled: true })}
+            ? "bg-blue-500 text-white hover:bg-blue-600"
+            : "bg-gray-300 text-gray-500 cursor-not-allowed"
+        } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
       >
-        <div
-          className={`px-2 py-1 rounded-md border flex gap-1 items-center ${
-            !hasNextPage
-              ? "text-gray-600 dark:text-gray-400 bg-slate-100 dark:bg-slate-800 "
-              : "text-blue-600 dark:text-blue-600 bg-white dark:bg-black"
-          }`}
-        >
-          <p>Next</p>
-          <ArrowRightSquare size={16} />
-        </div>
-      </Link>
+        Next
+      </button>
     </div>
   );
 };
 
-export default PaginationControlls;
+export default PaginationControls;
