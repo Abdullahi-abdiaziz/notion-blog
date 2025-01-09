@@ -25,7 +25,7 @@ const SearchForm = ({ onSearch }: SearchFormProps) => {
           placeholder="Search posts by title or tags..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="px-6 py-3 border-2 border-gray-300 bg-gray-200 text-gray-800 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+          className="px-6 py-3 border-2 border-gray-300 bg-gray-200 text-gray-800 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:border-gray-700"
         />
       </div>
     </form>
