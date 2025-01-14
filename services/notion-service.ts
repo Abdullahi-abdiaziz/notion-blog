@@ -104,7 +104,10 @@ export default class NotionService {
     return uniqueCategories;
   }
 
-  async getPostsByCategory(category: string): Promise<BlogPost[]> {
+  async getPostsByCategory(
+    category: string,
+    _p0?: { next: { revalidate: number } }
+  ): Promise<BlogPost[]> {
     if (!this.database) {
       throw new Error("No database ID provided.");
     }

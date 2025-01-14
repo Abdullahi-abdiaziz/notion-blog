@@ -4,7 +4,6 @@ import Link from "next/link";
 import { FileSignatureIcon } from "lucide-react";
 import BlurFade from "@/components/ui/blur-fade";
 import PostCard from "@/components/PostCard";
-import { Button } from "@/components/ui/button";
 import SubscribtionForm from "@/components/SubscribtionForm";
 import HeroContent from "@/components/HeroContent";
 import CategoriesSection from "@/components/CategoriesSection";

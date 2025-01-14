@@ -24,7 +24,10 @@ const page = async ({ params }: PostPageProps) => {
     params.category
       .split("-") // Split the string by hyphens
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
-      .join(" ") // Join the words with spaces
+      .join(" "), // Join the words with spaces
+    {
+      next: { revalidate: 5 },
+    }
   );
 
   // Render blog posts
