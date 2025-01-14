@@ -13,12 +13,6 @@ const geist = localFont({
   display: "swap", // Recommended for better performance
 });
 
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist", // Optional CSS variable
-  display: "swap", // Recommended for better performance
-});
-
 export const metadata: Metadata = {
   title: "Notion Blog",
   description:
@@ -34,7 +28,6 @@ export default function RootLayout({
     <ThemeProvider>
       <html lang="en">
         <body>
-          {/* <AuthProvider> */}
           <div
             className={`${geist.className} font-sans bg-slate-50 dark:bg-slate-900`}
           >
@@ -45,7 +38,6 @@ export default function RootLayout({
               <Footer />
             </GridBackground>
           </div>
-          {/* </AuthProvider> */}
         </body>
       </html>
     </ThemeProvider>

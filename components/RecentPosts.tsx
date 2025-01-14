@@ -31,7 +31,7 @@ const RecentPosts = ({ posts }: { posts: BlogPost[] }) => {
   const perPagePosts = filteredPosts.slice(start, end);
 
   return (
-    <section className="min-h-screen max-w-screen-2xl mx-auto my-16 px-5 relative">
+    <section className="min-h-[60vh] max-w-screen-2xl mx-auto my-16 px-5 relative">
       <PageTitle title={"Latest Blog Posts"} />
       <SearchForm onSearch={setSearchQuery} />
 
